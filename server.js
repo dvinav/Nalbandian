@@ -7,9 +7,9 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.static(__dirname + '/public'))
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'))
-app.use('/mdc', express.static(__dirname + '/node_modules/material-components-web/dist'))
-app.use('/material-icons', express.static(__dirname + '/node_modules/material-icons/iconfont'))
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/'))
+app.use('/mdc', express.static(__dirname + '/node_modules/material-components-web/'))
+app.use('/material-icons', express.static(__dirname + '/node_modules/material-icons/'))
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)

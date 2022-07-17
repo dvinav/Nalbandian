@@ -4,12 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/iconfont.css">
+    <title>Գրադարան</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/material-icons/iconfont/material-icons.css">
+    <script src="/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-    <span class="material-icons-round">
-        delete
-    </span>
+    <header>
+        <div class="headerLeft">
+            <h2>Գրադարան</h2>
+        </div>
+        <div class="headerCenter">
+            <div class="tabButtons">
+                <div class="tabButton" data-tab-button="1"><span><span class="material-icons-round">schedule</span>Հանձնված</span></div>
+                <div class="tabButton" data-tab-button="2"><span><span class="material-icons-round">people</span>Մարդիկ</span></div>
+                <div class="tabButton" data-tab-button="3"><span><span class="material-icons-round">book</span>Գրքեր</span></ion-icon></div>
+            </div>
+            <div class="headerCenter_bottomBorder"></div>
+        </div>
+        <div class="headerRight">
+            <div class="headerExit">
+                <div class="headerExitButton">
+                    <ion-icon name="exit-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="tabContainer" data-tab="1">
+            <div class="addNew addNew_borrowed"></div>
+            <div class="mainContent mainContent_borrowed"></div>
+        </div>
+        <div class="tabContainer" data-tab="2">
+            <div class="addNew addNew_members"></div>
+            <div class="mainContent mainContent_members"></div>
+        </div>
+        <div class="tabContainer" data-tab="3">
+            <div class="addNew addNew_books">
+            </div>
+            <div class="mainContent mainContent_books"></div>
+        </div>
+    </main>
 </body>
+<script src="/js/index.js"></script>
 </html>

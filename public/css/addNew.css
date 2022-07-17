@@ -1,0 +1,108 @@
+:root {
+    --row-height: 50px;
+    --row-padding: 5px;
+    --input-font-size: 16px;
+}
+
+/* .addNew table {
+    width: 100%;
+    padding-top: var(--row-padding);
+}
+
+.addNew table tr {
+    height: var(--row-height);
+    width: 100%;
+    padding: var(--row-padding);
+} */
+
+/* .addNew table tr td, .addNew table tr th {
+    height: var(--row-height);
+    padding: var(--row-padding);
+} */
+
+/* .addNew table tr th {
+    display: flex;
+    flex-wrap: wrap;
+} */
+
+.addNew {
+    display: flex;
+    flex-wrap: wrap;
+    padding: var(--row-padding);
+}
+
+.addNew button {
+    height: var(--row-height);
+    margin: var(--row-padding);
+    width: auto;
+    appearance: none;
+    background: none;
+    border: none;
+    border-radius: 5px;
+    transition: background 100ms;
+    color: var(--color1);
+    cursor: pointer;
+    flex-grow: 1 0 45%;
+    font-size: 15px;
+}
+
+.addNew button span {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.addNew button:hover {
+    background: var(--color4);
+}
+
+.addNew button:active {
+    background: var(--color5);
+}
+
+.addNew button ion-icon {
+    font-size: 20px;
+    margin-right: 7px;
+}
+
+.tdInput {
+    display: flex;
+    border-radius: 5px;
+    border: 2px solid var(--color2); 
+    height: var(--row-height);
+    margin: var(--row-padding);
+    transition: border-color 200ms;
+    flex-grow: 1 0 45%;
+}
+
+.tdInput_icon {
+    flex-grow: 1;
+    margin: 10px;
+    margin-left: 20px;
+}
+
+.tdInput ion-icon {
+    color: var(--color3);
+    font-size: 23px;
+    vertical-align: middle;
+    margin-top: 2px;
+}
+
+.tdInput_input {
+    flex-grow: 30;
+}
+
+.tdInput_input input {
+    position: relative;
+    appearance: none;
+    height: calc(100% - 4px);
+    border: none;
+    outline: none;
+    font-size: var(--input-font-size);
+    width: 98%;
+}
+
+.tdInput_active {
+    border-color: var(--color1);
+}
+

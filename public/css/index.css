@@ -1,0 +1,52 @@
+:root {
+    --color1: #1759bd;
+    --color2: #cfcfcf;
+    --color3: #606169;
+    --color4: #f8f8f8;
+    --color5: #e7e7e7;
+    --header-height: 100px;
+    --addnew-width: 24vw;
+    --ionicon-stroke-width: 50px;
+}
+
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tabContainer {
+    width: 100%;
+    display: flex;
+    min-height: 200vh;
+    flex-wrap: wrap;
+}
+
+.addNew {
+    height: calc(100vh - var(--header-height));
+    flex-grow: 1;
+    align-self: flex-start;
+    position: sticky;
+    top: var(--header-height);
+    border-right: 1px solid var(--color2);
+}
+
+.mainContent {
+    align-self: flex-end;
+    flex-grow: 4;
+}
+
+.tabContainer {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 200ms ease-out;
+}
+
+.activeTabContainer {
+    opacity: 1;
+    pointer-events: initial;
+}
+

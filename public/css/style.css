@@ -1,0 +1,15 @@
+:root {
+    --mdc-theme-primary: #283593;
+    --mdc-theme-on-primary: #424242;
+    --mdc-theme-on-secondary: #CFCFCF;
+}
+
+.mdc-top-app-bar {
+    background: none;
+    color: var(--mdc-theme-on-primary);
+    border-bottom: 1px solid var(--mdc-theme-on-secondary);
+}
+
+body, html {
+    margin: 0;
+}
