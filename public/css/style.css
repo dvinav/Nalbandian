@@ -1,15 +1,71 @@
 :root {
-    --mdc-theme-primary: #283593;
-    --mdc-theme-on-primary: #424242;
+    --header-height: 100px;
+    --ionicon-stroke-width: 50px;
+    --mdc-theme-primary: #3F51B5;
     --mdc-theme-on-secondary: #CFCFCF;
 }
 
-.mdc-top-app-bar {
-    background: none;
-    color: var(--mdc-theme-on-primary);
-    border-bottom: 1px solid var(--mdc-theme-on-secondary);
+
+body,
+html {
+    padding: 0;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body, html {
-    margin: 0;
+.tabContainer {
+    width: 100%;
+    display: flex;
+    min-height: 200vh;
+    flex-wrap: wrap;
+}
+
+.dataFormSection  {
+    height: calc(100vh - var(--header-height));
+    flex: 1;
+    align-self: flex-start;
+    position: sticky;
+    top: var(--header-height);
+    border-right: 1px solid var(--mdc-theme-on-secondary);
+    padding: 25px;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.dataFormSection > form > *,
+.dataFormSection > * {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.mainContent {
+    align-self: flex-end;
+    flex: 4;
+}
+
+.tabContainer {
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 200ms ease-out;
+}
+
+.activeTabContainer {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+.dataFormSection_buttonContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.dataFormSection_buttonContainer  > button {
+    flex-grow:1;
+    height: 56px;
+}
+
+.dataFormSection > form > button:last-child {
+    margin-bottom: 50px;
+    height: 56px;
 }
