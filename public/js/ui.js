@@ -23,3 +23,10 @@ $('.tdInput_input input').on('focus', (e) => {
 $('.tdInput_input input').on('focusout', (e) => {
     $(e.target).parent().parent().removeClass('tdInput_active')
 })
+
+$('.mdc-text-field').each(i => mdc.textField.MDCTextField.attachTo($('.mdc-text-field')[i]))
+
+$('.mdc-button').each(i => mdc.ripple.MDCRipple.attachTo($('.mdc-button')[i]))
+
+$('.mdc-select').each(i => mdc.select.MDCSelect.attachTo($('.mdc-select')[i]))
+

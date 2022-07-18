@@ -6,9 +6,9 @@ header {
     width: 100%;
     left: 0;
     top: 0;
-    border-bottom: 1px solid var(--color2);
+    border-bottom: 1px solid var(--mdc-theme-on-secondary);
     user-select: none;
-    color: #505050;
+    color: var(----mdc-theme-on-primary);
 }
 
 header .headerLeft, 
@@ -60,7 +60,7 @@ header .headerCenter {
 }
 
 .headerCenter_bottomBorder {
-    background: var(--color1);
+    background: var(--mdc-theme-primary);
     width: 23.333%;
     height: 4px;
     align-self: flex-end;
@@ -85,7 +85,7 @@ header .headerCenter {
 }
 
 .activeTabBtn {
-    color: var(--color1);
+    color: var(--mdc-theme-primary);
     font-weight: bold;
 }
 
