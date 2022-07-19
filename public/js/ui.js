@@ -1,11 +1,5 @@
 let defaultTab = 3
 
-$(() => updateActiveTab(defaultTab))
-
-$('.tabButton').on('click', (e) => {
-    updateActiveTab($(e.target).data('tabButton'))
-})
-
 let updateActiveTab = tabNo => {
     $('.activeTabBtn').removeClass('activeTabBtn')
     $('.activeTabContainer').removeClass('activeTabContainer')
@@ -15,38 +9,6 @@ let updateActiveTab = tabNo => {
         marginLeft: `${(5+23.333*(tabNo-1)+[0,2,4][tabNo-1]*5)}%`
     })
 }
-
-$('.tdInput_input input').on('focus', (e) => {
-    $(e.target).parent().parent().addClass('tdInput_active')
-})
-
-$('.tdInput_input input').on('focusout', (e) => {
-    $(e.target).parent().parent().removeClass('tdInput_active')
-})
-
-$('.mdc-text-field:not(.searchBox)').each(i => mdc.textField.MDCTextField.attachTo($('.mdc-text-field:not(.searchBox)')[i]))
-
-$('.mdc-button').each(i => mdc.ripple.MDCRipple.attachTo($('.mdc-button')[i]))
-
-$('.button_ripple').each(i => mdc.ripple.MDCRipple.attachTo($('.button_ripple')[i]))
-
-$('.mdc-select').each(i => mdc.select.MDCSelect.attachTo($('.mdc-select')[i]))
-
-const contextMenu_books = mdc.menu.MDCMenu.attachTo($('.contextMenu_books')[0])
-contextMenu_books.setFixedPosition(true)
-
-$('.mainContent').on('contextmenu', () => { return false })
-
-$('.mainContent_books table tbody tr').on('contextmenu', e => { 
-    contextMenu_books.setAbsolutePosition(e.pageX, e.pageY)
-    console.log($(e.target).parent().attr('data-bInfo'))
-    $('.contextMenu_books ul li:first-child .mdc-list-item__text').html($(e.target).parent().attr('data-bInfo'))
-    contextMenu_books.open = contextMenu_books.open ? 0 : 1
-})
-
-$(() => {
-    updateFormState('dataFormSection_books', 1)
-})
 
 let updateFormState = (dataForm, mode) => {
     let form = $('.' + dataForm).eq(0).children('form').eq(0)
@@ -93,3 +55,23 @@ let clearForm = form => {
         $('.' + form).eq(0).children('.mdc-text-field').eq(i).children('span.mdc-notched-outline').eq(0).children('span.mdc-notched-outline__notch').css('width', 'auto')
     })
 }
+
+const initialize = () => {
+    updateActiveTab(defaultTab)
+
+    $('.tabButton').on('click', (e) => {
+        updateActiveTab($(e.target).data('tabButton'))
+    })
+
+    $('.mainContent').on('contextmenu', () => { return false })
+
+    $('.mainContent_books table tbody tr').on('contextmenu', e => {
+        contextMenu_books.setAbsolutePosition(e.pageX, e.pageY)
+        $('.contextMenu_books .mdc-list-item__text').html($(e.target).parent().attr('data-bInfo'))
+        contextMenu_books.open = contextMenu_books.open ? 0 : 1
+    })
+
+    updateFormState('dataFormSection_books', 1)
+}
+
+$(() => initialize())

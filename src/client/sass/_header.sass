@@ -1,0 +1,68 @@
+@use 'variables' as var
+
+header  
+	display: flex 
+	align-items: center 
+	height: var.$header-height 
+	width: 100% 
+	border-bottom: 1px solid var(--mdc-theme-on-secondary) 
+	user-select: none 
+	color: var.$header-color
+	& > *
+		display: flex 
+		height: 100% 
+		flex: 1
+		align-items: center
+	.headerLeft 
+		h2 
+			margin-left: 20px 
+			font-weight: 500
+	.headerRight
+		flex-direction: row-reverse
+		
+
+.headerCenter
+	flex: 2
+	position: relative 
+	span 
+		.material-icons-round 
+			margin-right: 8px 
+			font-size: 20px 
+
+.tabButton 
+	flex: 1
+	display: flex 
+	justify-content: center 
+	cursor: pointer 
+	transition: all 150ms ease 
+	height: 100% 
+	align-items: center 
+	span 
+		font-size: 17px 
+		display: inline-flex 
+		pointer-events: none 
+	&:hover 
+		background: #f9f9f9 
+
+.headerCenter_bottomBorder 
+	background: var(--mdc-theme-primary) 
+	width: 23.333% 
+	height: 5px 
+	align-self: flex-end 
+	position: absolute 
+	border-radius: 50px 50px 0 0 
+	transition: 200ms
+
+.activeTabBtn 
+	color: var(--mdc-theme-primary) 
+	font-weight: bold 
+
+.headerExitButton 
+	height: 56px 
+	min-width: 0
+	width: 56px
+	margin-right: 20px
+	.mdc-button__ripple 
+		border-radius: 50px
+	.material-icons-round
+		color: var.$header-color
