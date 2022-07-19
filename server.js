@@ -2,8 +2,11 @@ const express = require('express')
 const app = express()
 const port = 2022
 
+app.set('view engine', 'pug')
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.htm')
+    // res.sendFile(__dirname + '/public/index.htm')
+    res.render(__dirname + '/src/views/index.pug')
 })
 
 app.use(express.static(__dirname + '/public'))

@@ -20,6 +20,8 @@ html {
     flex-wrap: wrap;
 }
 
+/* BEGIN dataFormSection */
+
 .dataFormSection  {
     height: calc(100vh - var(--header-height));
     flex: 1;
@@ -36,11 +38,6 @@ html {
 .dataFormSection > * {
     width: 100%;
     margin-bottom: 20px;
-}
-
-.mainContent {
-    align-self: flex-end;
-    flex: 4;
 }
 
 .tabContainer {
@@ -69,3 +66,122 @@ html {
     margin-bottom: 50px;
     height: 56px;
 }
+
+/* END dataFormSection */
+
+/* BEGIN mainContent */
+
+.mainContent {
+    flex: 4;
+    cursor: default;
+}
+
+.mainContent > table {
+    border-spacing: 0;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.mainContent tr {
+    height: 60px;
+}
+
+.mainContent table thead tr {
+    border-bottom: 1px solid var(--mdc-theme-on-secondary);
+    border-top: 1px solid var(--mdc-theme-on-secondary);
+}
+
+.mainContent table tr:not(.oddRow):hover {
+    background: #fafafa;
+}
+
+.oddRow {
+    background: #f8f8f8;
+}
+
+.oddRow:hover {
+    background: #f4f4f4;
+}
+
+.mainContent table tbody button {
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    color: var(--mdc-theme-primary);
+}
+
+.mainContent table tbody button a {
+    color: var(--mdc-theme-primary);
+}
+
+.mainContent table tbody button .mdc-button__ripple {
+    border-radius: 50px;
+}
+
+.mdc-menu {
+    background: #fbfbfb;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px 0 #00000040;
+    width: auto;
+    max-width: 500px;
+}
+
+.mdc-menu ul {
+    padding: 0;
+}
+
+.mdc-list-item {
+    height: auto;
+    min-height: 50px;
+}
+
+.contextMenu_books ul li:first-child {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.mdc-list-item--disabled {
+    color: #505050;
+}
+
+.mdc-list-item .mdc-list-item__text {
+    display: flex;
+    align-items: center;
+}
+
+.buttonGroup {
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+
+.mdc-menu ul li:last-child {
+    padding: 0;
+}
+
+.buttonGroup button {
+    flex: 1;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.buttonGroup button .mdc-button__label {
+    font-weight: 700;
+}
+
+.buttonGroup button .mdc-button__ripple {
+    border-radius: 0;
+}
+
+.searchBox {
+    width: 100%;
+    border-radius: 0;
+}
+
+.searchBox input {
+    font-size: 20px;
+}
+
+/* END mainContent */
