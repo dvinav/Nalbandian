@@ -1,0 +1,44 @@
+.dataFormSection
+	.dataFormSection_buttonContainer
+		+MDCButton('Ավելացնել', 'add')(class='dataFormSection_buttonContainer_addButton')
+		+MDCButton('Մաքրել', 'backspace')(class='dataFormSection_buttonContainer_clearButton')
+	form
+		+MDCTextField('title', 'Վերնագիր', 'title', true)
+		+MDCTextField('subtitle', 'Խորագիր', 'text_fields', true)
+		+MDCTextField('author', 'Հեղինակ (ներ)', 'edit', true)
+		+MDCTextField('publisher', 'Հրատարակչություն', 'publish', true)
+		+MDCTextField('publishDate', 'Հրատարակչության Թվական', 'date_range', true)
+		+MDCTextField('publishLocation', 'Հրատարակչության Վայր', 'location_city', true)
+		+MDCTextField('translator', 'Թարգմանիչ', 'translate')
+		+MDCTextField('ISBN', 'ISBN', 'fingerprint', true)
+		+MDCTextField('bookCode', 'Կոդ', '123', true)
+		+MDCSelect('lang', 'Լեզու', 'language')
+			+MDCListOption('hy', 'Հայերեն')
+			+MDCListOption('fa', 'Պարսկերեն')
+			+MDCListOption('en', 'Անգլերեն')
+		+MDCTextField('ebook', 'Էլ-Գրքի Հասցե', 'link')
+		+MDCButton('Հաստատել', 'check', 'submit')(class='mdc-button--raised')
+.mainContent.mainContent_books
+	+SearchBox()
+	+MDCContextMenu(1)
+	table
+		colgroup
+			col(span='1', style='width: 4%;')
+			col(span='1', style='width: 27%;')
+			col(span='1', style='width: 27%;')
+			col(span='1', style='width: 13%;')
+			col(span='1', style='width: 13%;')
+			col(span='1', style='width: 9%;')
+			col(span='1', style='width: 6%;')
+		thead
+			tr
+				th #
+				th Վերնագիր
+				th Խորագիր
+				th Հեղինակ
+				th Թարգմանիչ
+				th Կոդ
+				th
+					span.material-icons-round laptop_chromebook
+		tbody
+			include sampleData_books.pug

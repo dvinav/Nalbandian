@@ -1,0 +1,25 @@
+@use 'variables' as var
+
+.dataFormSection 
+	flex: 1 
+	border-right: 1px solid var(--mdc-theme-on-secondary) 
+	padding: 25px 
+	height: 100vh - var.$header-height
+	overflow-y: auto
+	button[type=submit] 
+		height: 56px
+	& > *,
+	& > form > *
+		width: 100% 
+		margin-bottom: 20px 
+
+.dataFormSection_buttonContainer 
+	display: flex 
+	gap: 10px 
+	& > button 
+		flex: 1
+		height: 56px 
+
+.activeTabContainer 
+	opacity: 1 
+	pointer-events: initial 

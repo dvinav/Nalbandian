@@ -1,0 +1,60 @@
+mixin MDCTextField(input_name, input_label, input_icon, req=false)
+	.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon
+		span.mdc-notched-outline
+			span.mdc-notched-outline__leading
+			span.mdc-notched-outline__notch
+				span.mdc-floating-label= input_label
+			span.mdc-notched-outline__trailing
+		i.material-icons.mdc-text-field__icon.mdc-text-field__icon--leading(tabindex='0', role='button')= input_icon
+		input.mdc-text-field__input(type='text', name=input_name, required=req)
+
+mixin MDCSelect(input_name, input_label, input_icon)
+	.mdc-select.mdc-select--outlined.mdc-select--with-leading-icon
+		.mdc-select__anchor(role='button')
+			span.mdc-notched-outline
+				span.mdc-notched-outline__leading
+				span.mdc-notched-outline__notch
+					span.mdc-floating-label= input_label 
+				span.mdc-notched-outline__trailing
+			i.material-icons.mdc-select__icon(role='button')= input_icon
+			span.mdc-select__selected-text-container
+				span.mdc-select__selected-text
+			span.mdc-select__dropdown-icon.material-icons-round arrow_drop_down
+		.mdc-select__menu.mdc-menu.mdc-menu-surface.mdc-menu-surface--fullwidth
+			ul.mdc-list(role='listbox')
+				block
+
+
+mixin MDCListOption(value, label)
+	li.mdc-list-item.mdc-list-item--selected(aria-selected='true' data-value=value role='option')
+		span.mdc-list-item__ripple
+		span.mdc-list-item__text= label
+	
+mixin MDCButton(button_label, button_icon, button_type='button')
+	button.mdc-button(class!=attributes.class type=button_type)
+		span.mdc-button__ripple
+		i.material-icons.mdc-button__icon(aria-hidden='true')= button_icon
+		span.mdc-button__label= button_label
+
+mixin SearchBox()
+	form.searchBox_form
+		.mdc-text-field.mdc-text-field--outlined.mdc-text-field--no-label.mdc-text-field--with-leading-icon.searchBox
+			i.material-icons.mdc-text-field__icon.mdc-text-field__icon--leading(tabindex='0', role='button') search
+			input.mdc-text-field__input(type='text', placeholder='Որոնել')
+
+mixin MDCContextMenu(extra)
+	.mdc-menu.mdc-menu-surface.contextMenu
+		ul.mdc-list(role='menu', aria-hidden='true', aria-orientation='vertical', tabindex='-1')
+			if extra
+				li.mdc-list-item.mdc-list-item--disabled(role='menuitem')
+					span.mdc-list-item__text
+			li.mdc-list-item(role='menuitem')
+				.buttonGroup
+					button.mdc-button.mdc-button--icon-leading
+						span.mdc-button__ripple
+						i.material-icons.mdc-button__icon(aria-hidden='true') edit
+						span.mdc-button__label Խմբագրել
+					button.mdc-button.mdc-button--icon-leading
+						span.mdc-button__ripple
+						i.material-icons.mdc-button__icon(aria-hidden='true') delete
+						span.mdc-button__label Ջնջել
