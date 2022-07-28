@@ -1,4 +1,4 @@
-mixin MDCTextField(input_name, input_label, input_icon, req=false)
+mixin MDCTextField(input_name, input_label, input_icon, req=false, input_placeholder='')
 	.mdc-text-field.mdc-text-field--outlined.mdc-text-field--with-leading-icon
 		span.mdc-notched-outline
 			span.mdc-notched-outline__leading
@@ -6,7 +6,7 @@ mixin MDCTextField(input_name, input_label, input_icon, req=false)
 				span.mdc-floating-label= input_label
 			span.mdc-notched-outline__trailing
 		i.material-icons.mdc-text-field__icon.mdc-text-field__icon--leading(tabindex='0', role='button')= input_icon
-		input.mdc-text-field__input(type='text', name=input_name, required=req)
+		input.mdc-text-field__input(type='text', name=input_name, required=req, placeholder=input_placeholder)
 
 mixin MDCSelect(input_name, input_label, input_icon)
 	.mdc-select.mdc-select--outlined.mdc-select--with-leading-icon

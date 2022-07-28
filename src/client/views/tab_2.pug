@@ -1,2 +1,30 @@
-.dataFormSection.dataFormSection_members
-.mainContent.mainContent_members
+.dataFormSection
+	.dataFormSection_buttonContainer
+		+MDCButton('Ավելացնել', 'add')(class='dataFormSection_buttonContainer_addButton')
+		+MDCButton('Մաքրել', 'backspace')(class='dataFormSection_buttonContainer_clearButton')
+	form
+		+MDCTextField('name', 'Անուն', 'person', true)
+		+MDCTextField('surname', 'Ազգանուն', 'people', true)
+		+MDCTextField('birthdate', 'Ծննդյան Թվական', 'date_range', true, 'ՕՕ.ԱԱ.ՏՏՏՏ')
+		+MDCTextField('phone', 'Բջջային Համար', 'smartphone', true)
+		+MDCTextField('home', 'Տան Համար', 'phone', true)
+		+MDCTextField('address', 'Հասցե', 'home', true)
+		+MDCTextField('memberCode', 'Կոդ', '123', true)
+		+MDCButton('Հաստատել', 'check', 'submit')(class='mdc-button--raised')
+.mainContent.mainContent_books
+	+SearchBox()
+	+MDCContextMenu(1)
+	table
+		colgroup
+			col(span='1', style='width: 20%')
+			col(span='1', style='width: 30%')
+			col(span='1', style='width: 30%')
+			col(span='1', style='width: 20%')
+		thead
+			tr
+				th #
+				th Անուն
+				th Ազգանուն
+				th Կոդ
+		tbody
+			include sampleData_members.pug

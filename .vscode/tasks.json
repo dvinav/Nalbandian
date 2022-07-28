@@ -6,6 +6,12 @@
             "type": "shell",
             "command": "sass --watch src/client/sass/:public/",
             "problemMatcher": []
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "sass src/client/sass/:public/ --style compressed && pug src/client/views/index.pug --out public",
+            "problemMatcher": []
         }
     ]
 }
