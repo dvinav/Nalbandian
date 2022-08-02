@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/SohrabHovhannes/Nalbandian#readme",
   "dependencies": {
+    "bootstrap": "^5.2.0",
     "express": "^4.18.1",
     "jquery": "^3.6.0",
-    "material-components-web": "^14.0.0",
     "material-icons": "^1.11.5"
   },
   "devDependencies": {

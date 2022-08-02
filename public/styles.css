@@ -1,6 +1,7 @@
 :root {
-  --mdc-theme-primary: #3F51B5;
-  --mdc-theme-on-secondary: #CFCFCF ;
+  --accent-primary: #3F51B5;
+  --accent-primary-bg: #d3d7f1;
+  --bs-link-color: #3F51B5;
 }
 
 header {
@@ -8,7 +9,7 @@ header {
   align-items: center;
   height: 9vh;
   width: 100%;
-  border-bottom: 1px solid var(--mdc-theme-on-secondary);
+  border-bottom: 1px solid var(--bs-gray-400);
   user-select: none;
   color: #404040;
 }
@@ -17,6 +18,9 @@ header > * {
   height: 100%;
   flex: 1;
   align-items: center;
+}
+header .headerLeft {
+  padding-top: 7px;
 }
 header .headerLeft h2 {
   margin-left: 20px;
@@ -38,11 +42,11 @@ header .headerRight {
 .tabButton {
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 150ms ease;
   height: 100%;
-  align-items: center;
 }
 .tabButton span {
   font-size: 17px;
@@ -54,7 +58,7 @@ header .headerRight {
 }
 
 .headerCenter_bottomBorder {
-  background: var(--mdc-theme-primary);
+  background: var(--accent-primary);
   width: 23.333%;
   height: 5px;
   align-self: flex-end;
@@ -64,18 +68,27 @@ header .headerRight {
 }
 
 .activeTabBtn {
-  color: var(--mdc-theme-primary);
+  color: var(--accent-primary);
   font-weight: bold;
 }
 
 .headerExitButton {
   height: 56px;
-  min-width: 0;
   width: 56px;
   margin-right: 20px;
-}
-.headerExitButton .mdc-button__ripple {
+  background: none;
+  border: none;
   border-radius: 50px;
+  transition: background 100ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.headerExitButton:hover {
+  background: rgba(0, 0, 0, 0.062745098);
+}
+.headerExitButton:active {
+  background: rgba(0, 0, 0, 0.1254901961);
 }
 .headerExitButton .material-icons-round {
   color: #404040;
@@ -83,7 +96,7 @@ header .headerRight {
 
 .dataFormSection {
   flex: 1;
-  border-right: 1px solid var(--mdc-theme-on-secondary);
+  border-right: 1px solid var(--bs-gray-400);
   padding: 25px;
   height: 91vh;
   overflow-y: auto;
@@ -96,13 +109,25 @@ header .headerRight {
   margin-bottom: 20px;
 }
 
-.dataFormSection_buttonContainer {
+.dataFormSection_buttonContainer,
+.formFooter {
   display: flex;
   gap: 10px;
 }
-.dataFormSection_buttonContainer > button {
+.dataFormSection_buttonContainer > button,
+.formFooter > button {
   flex: 1;
   height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.dataFormSection_buttonContainer > button i,
+.formFooter > button i {
+  font-size: 19px;
+  padding-bottom: 4px;
+  padding-right: 4px;
 }
 
 .activeTabContainer {
@@ -124,8 +149,11 @@ header .headerRight {
   height: 60px;
 }
 .mainContent table thead tr {
-  border-bottom: 1px solid var(--mdc-theme-on-secondary);
-  border-top: 1px solid var(--mdc-theme-on-secondary);
+  border-bottom: 1px solid var(--bs-gray-400);
+  border-top: 1px solid var(--bs-gray-400);
+}
+.mainContent table thead tr th:last-child {
+  padding-top: 8px;
 }
 .mainContent table tbody tr:not(.oddRow):hover {
   background: #fafafa;
@@ -136,17 +164,26 @@ header .headerRight {
 .mainContent table tbody .oddRow:hover {
   background: #f4f4f4;
 }
-.mainContent table tbody button {
-  width: 50px;
-  min-width: 50px;
-  height: 50px;
-  color: var(--mdc-theme-primary);
-}
-.mainContent table tbody button a {
-  color: var(--mdc-theme-primary);
-}
-.mainContent table tbody button .mdc-button__ripple {
+.mainContent table tbody a span {
+  width: 40px;
+  height: 40px;
   border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 100ms;
+}
+.mainContent table tbody a span:hover {
+  background: rgba(0, 0, 0, 0.062745098);
+}
+.mainContent table tbody a span:active {
+  background: rgba(0, 0, 0, 0.1254901961);
+}
+.mainContent table tbody a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mdc-menu {
@@ -199,19 +236,6 @@ header .headerRight {
   padding-bottom: 8px;
 }
 
-.mdc-select .mdc-menu ul li:last-child {
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-.mdc-select .mdc-menu-surface--fullwidth {
-  width: 100%;
-}
-
-.mdc-select .mdc-select--with-leading-icon .mdc-select__icon {
-  margin-left: 16px;
-}
-
 body,
 html {
   margin: 0;
@@ -237,9 +261,36 @@ html {
 .searchBox {
   width: 100%;
   border-radius: 0;
+  display: flex;
+  height: 50px;
+}
+.searchBox i {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .searchBox input {
+  outline: none;
   font-size: 20px;
+  flex: 10;
+  border: none;
+}
+
+.dataFormSection_buttonContainer button {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  justify-content: center;
+}
+.dataFormSection_buttonContainer button i {
+  font-size: 17px;
+  padding-bottom: 3px;
+  padding-right: 5px;
+}
+
+i.material-icons {
+  user-select: none;
 }
 
 /*# sourceMappingURL=styles.css.map */

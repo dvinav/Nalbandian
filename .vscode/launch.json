@@ -17,6 +17,7 @@
 				"action": "openExternally",
 				"uriFormat": "http://localhost:%s"
 			},
+			"preLaunchTask": "tsc: build - tsconfig.json"
 		}
 	]
 }

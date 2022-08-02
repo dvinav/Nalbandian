@@ -1,3 +1,5 @@
+@import 'mixins'
+	
 .mainContent 
 	flex: 4 
 	cursor: default 
@@ -11,8 +13,10 @@
 	table 
 		thead 
 			tr 
-				border-bottom: 1px solid var(--mdc-theme-on-secondary) 
-				border-top: 1px solid var(--mdc-theme-on-secondary) 
+				border-bottom: 1px solid var(--bs-gray-400) 
+				border-top: 1px solid var(--bs-gray-400) 
+				th:last-child
+					padding-top: 8px
 		
 		tbody 
 			tr:not(.oddRow):hover 
@@ -21,12 +25,16 @@
 				background: #f8f8f8 
 				&:hover 
 					background: #f4f4f4 
-			button 
-				width: 50px
-				min-width: 50px 
-				height: 50px 
-				color: var(--mdc-theme-primary) 
-				a 
-					color: var(--mdc-theme-primary) 
-				.mdc-button__ripple 
-					border-radius: 50px 
+			a span
+				width:  40px
+				height: 40px
+				border-radius: 50px
+				@include Center
+				transition: background 100ms
+				&:hover
+					background: #00000010
+				&:active
+					background: #00000020
+			a
+				text-decoration: none
+				@include Center

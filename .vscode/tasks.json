@@ -1,17 +1,17 @@
 {
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "Sass Watch",
-            "type": "shell",
-            "command": "sass --watch src/client/sass/:public/",
-            "problemMatcher": []
-        },
-        {
-            "label": "Build",
-            "type": "shell",
-            "command": "sass src/client/sass/:public/ --style compressed && pug src/client/views/index.pug --out public",
-            "problemMatcher": []
-        }
-    ]
+		{
+			"label": "Sass Watch",
+			"type": "shell",
+			"command": "sass --watch src/client/sass/:public/",
+			"problemMatcher": []
+		},
+		{
+			"label": "Build",
+			"type": "shell",
+			"command": "sass src/client/sass/:public/ --style compressed && pug src/client/views/index.pug --out public",
+			"problemMatcher": []
+		}
+	]
 }

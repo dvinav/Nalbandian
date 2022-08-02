@@ -1,19 +1,20 @@
 .dataFormSection
 	.dataFormSection_buttonContainer
-		+MDCButton('Ավելացնել', 'add')(class='dataFormSection_buttonContainer_addButton')
-		+MDCButton('Մաքրել', 'backspace')(class='dataFormSection_buttonContainer_clearButton')
+		+Button('Ավելացնել', 'add',)(class='btn-secondary dataFormSection_buttonContainer_addButton')
+		+Button('Մաքրել', 'clear',)(class='btn-secondary dataFormSection_buttonContainer_clearButton')
 	form
-		+MDCTextField('name', 'Անուն', 'person', true)
-		+MDCTextField('surname', 'Ազգանուն', 'people', true)
-		+MDCTextField('birthdate', 'Ծննդյան Թվական', 'date_range', true, 'ՕՕ.ԱԱ.ՏՏՏՏ')
-		+MDCTextField('phone', 'Բջջային Համար', 'smartphone', true)
-		+MDCTextField('home', 'Տան Համար', 'phone', true)
-		+MDCTextField('address', 'Հասցե', 'home', true)
-		+MDCTextField('memberCode', 'Կոդ', '123', true)
-		+MDCButton('Հաստատել', 'check', 'submit')(class='mdc-button--raised')
+		+TextField('members', 'name', 'Անուն*', 'person', true)
+		+TextField('members', 'surname', 'Ազգանուն*', 'people', true)
+		+TextField('members', 'birthdate', 'Ծննդյան Թվական*', 'date_range', true)
+		+TextField('members', 'phone', 'Բջջային Համար*', 'smartphone', true)
+		+TextField('members', 'home', 'Տան Համար', 'phone', true)
+		+TextField('members', 'address', 'Հասցե', 'home', true)
+		+TextField('members', 'memberCode', 'Կոդ*', '123', true)
+		.formFooter
+			+Button('Չեղարկել', 'clear')(class='btn-danger')
+			+Button('Հաստատել', 'check', 'submit')(class='btn-primary')
 .mainContent.mainContent_books
 	+SearchBox()
-	+MDCContextMenu(1)
 	table
 		colgroup
 			col(span='1', style='width: 20%')

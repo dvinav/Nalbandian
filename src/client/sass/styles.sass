@@ -3,7 +3,7 @@
 @use 'dataFormSection'
 @use 'mainContent'
 @use 'contextMenu'
-@use 'MDCListFix'
+@import 'mixins'
 
 body,
 html 
@@ -28,5 +28,27 @@ html
 .searchBox 
 	width: 100% 
 	border-radius: 0 
+	display: flex
+	height: 50px
+	i
+		width: 40px
+		@include Center
 	input 
+		outline: none
 		font-size: 20px 
+		flex: 10
+		border: none
+
+.dataFormSection_buttonContainer button 
+	display: inline-flex
+	align-items: center
+	font-size: 15px
+	justify-content: center
+	i
+		font-size: 17px
+		padding-bottom: 3px
+		padding-right: 5px
+
+i.material-icons 
+	user-select: none
+

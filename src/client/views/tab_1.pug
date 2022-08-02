@@ -1,2 +1,30 @@
-.dataFormSection.dataFormSection_borrowed
+.dataFormSection
+	.dataFormSection_buttonContainer
+		+Button('Հանձնել', 'add',)(class='btn-secondary dataFormSection_buttonContainer_addButton')
+		+Button('Մաքրել', 'clear',)(class='btn-secondary dataFormSection_buttonContainer_clearButton')
+	form
+		+TextField('borrowed', 'member', 'Անդամ*', 'person', true)
+		+TextField('borrowed', 'book', 'Գիրք*', 'date_range', true)
+		.formFooter
+			+Button('Չեղարկել', 'clear')(class='btn-danger')
+			+Button('Հաստատել', 'check', 'submit')(class='btn-primary')
 .mainContent.mainContent_borrowed
+	+SearchBox()
+	table
+		colgroup
+			col(span='1', style='width: 5%')
+			col(span='1', style='width: 25%')
+			col(span='1', style='width: 25%')
+			col(span='1', style='width: 15%')
+			col(span='1', style='width: 15%')
+			col(span='1', style='width: 15%')
+		thead
+			tr
+				th #
+				th Անուն
+				th Գիրք
+				th Թվական
+				th Ժամկետ
+				th Վերադարձում
+		tbody
+			include sampleData_borrowed.pug

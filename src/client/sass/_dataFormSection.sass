@@ -1,8 +1,9 @@
 @use 'variables' as var
+@import 'mixins'
 
 .dataFormSection 
 	flex: 1 
-	border-right: 1px solid var(--mdc-theme-on-secondary) 
+	border-right: 1px solid var(--bs-gray-400) 
 	padding: 25px 
 	height: 100vh - var.$header-height
 	overflow-y: auto
@@ -13,12 +14,20 @@
 		width: 100% 
 		margin-bottom: 20px 
 
-.dataFormSection_buttonContainer 
+.dataFormSection_buttonContainer,
+.formFooter
 	display: flex 
 	gap: 10px 
 	& > button 
 		flex: 1
 		height: 56px 
+		@include Center
+		font-size: 15px
+		i
+			font-size: 19px
+			padding-bottom: 4px
+			padding-right: 4px
+	
 
 .activeTabContainer 
 	opacity: 1 

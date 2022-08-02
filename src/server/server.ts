@@ -13,8 +13,8 @@ app.get('/', (req, res) => {
 
 app.use(express.static(process.cwd() + '/public'))
 app.use('/jquery', express.static(process.cwd() + '/node_modules/jquery/'))
-app.use('/mdc', express.static(process.cwd() + '/node_modules/material-components-web/'))
 app.use('/material-icons', express.static(process.cwd() + '/node_modules/material-icons/'))
+app.use('/bootstrap', express.static(process.cwd() + '/node_modules/bootstrap/'))
 
 app.listen(port, () => {
 	console.log(`App listening on port ${port}`)

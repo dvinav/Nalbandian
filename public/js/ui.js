@@ -1,74 +1,48 @@
-const defaultTab = 2
+const defaultTab = 1
 
-const Helper = n => {
-	let to
-	switch (n) {
-	case 1:
-		to = MDCElements.tab_1
-		break
-	case 2:
-		to = MDCElements.tab_2
-		break
-	case 3:
-		to = MDCElements.tab_3
-		break
-	}
-	return {
-		q: query => { return $(`.tabContainer[data-tab=${n}] ${query}`) },
-		o: to,
-		f: query => { return $(`.tabContainer[data-tab=${n}] form ${query}`) }
-	}
-	
+const TS = (tab, query) => {
+	return $(`.tabContainer[data-tab=${tab}] .dataFormSection ${query}`)
 }
 
 const forms = {
 	update: (tab, mode) => {
 		switch (mode) {
 			case 0:
-				Helper(tab).o.textFields.forEach((e) => e.disabled = 1)
-				if (tab == 3) Helper(tab).o.select.disabled = 1
-				Helper(tab).q('form').attr('data-mode', 'disabled')
-				Helper(tab).f('input').attr('disabled', '')
-				Helper(tab).f('.mdc-text-field').addClass('mdc-text-field--disabled')
-				Helper(tab).q(':submit').attr('disabled', true)
-				Helper(tab).q('.dataFormSection_buttonContainer_addButton').removeAttr('disabled')
+				TS(tab, `form`).attr('data-mode', 'disabled')
+				TS(tab, `form input`).attr('disabled', '')
+				TS(tab, `form select`).attr('disabled', '')
+				TS(tab, `.formFooter button`).attr('disabled', true)
+				TS(tab, `.dataFormSection_buttonContainer_addButton`).removeAttr('disabled')
 				forms.clear()
 				break
 			case 1:
-				Helper(tab).o.textFields.forEach((e) => e.disabled = 0)
-				if (tab == 3) Helper(tab).o.select.disabled = 0
-				Helper(tab).q('form').attr('data-mode', 'add')
-				Helper(tab).f('input').removeAttr('disabled')
-				$(`.tabContainer[data-tab=${tab}] form .mdc-text-field--disabled`).removeClass('mdc-text-field--disabled')
-				Helper(tab).q(':submit').attr('disabled', true)
-				Helper(tab).q('.dataFormSection_buttonContainer_addButton').attr('disabled', true)
+				TS(tab, `form`).attr('data-mode', 'add')
+				TS(tab, `form input`).removeAttr('disabled')
+				TS(tab, `form select`).removeAttr('disabled')
+				TS(tab, `.formFooter button[type=submit]`).attr('disabled', true)
+				TS(tab, `.formFooter button[type=button]`).removeAttr('disabled')
+				TS(tab, `.dataFormSection_buttonContainer_addButton`).attr('disabled', '')
 				break
 			case 2:
-				Helper(tab).o.textFields.forEach((e) => e.disabled = 0)
-				if (tab == 3) Helper(tab).o.select.disabled = 0
-				Helper(tab).q('form').attr('data-mode', 'edit')
-				Helper(tab).f('input').removeAttr('disabled')
-				$(`.tabContainer[data-tab=${tab}] form .mdc-text-field--disabled`).removeClass('mdc-text-field--disabled')
-				Helper(tab).q(':submit').removeAttr('disabled')
-				Helper(tab).q('.dataFormSection_buttonContainer_addButton').attr('disabled', true)
+				TS(tab, `form`).attr('data-mode', 'edit')
+				TS(tab, `form input`).removeAttr('disabled')
+				TS(tab, `form select`).removeAttr('disabled')
+				TS(tab, `.formFooter button[type=submit]`).attr('disabled', true)
+				TS(tab, `.formFooter button[type=button]`).removeAttr('disabled')
+				TS(tab, `.dataFormSection_buttonContainer_addButton`).attr('disabled', '')
 				break
 		}
 	},
-	clear: () => {
-		$('input').val('')
-		$('.mdc-text-field .mdc-floating-label--float-above').removeClass('mdc-floating-label--float-above')
-		$('.mdc-text-field .mdc-notched-outline__notch').css('width', 'auto')
-		$('.mdc-text-field .mdc-notched-outline--notched').removeClass('mdc-notched-outline--notched')
+	clear: tab => {
+		TS(tab, `form input`).val('')
 	},
 	updateSubmitBtn: form => {
-		
-		Helper(form).f('[required]').each(function() {
+		TS(form, 'form [required]').each(function() {
 			if($(this).val() == '') {
-				console.log('asdasdasd   ' + form)
-				Helper(form).f('[type=submit]').prop('disabled', 'true')
+				TS(form, 'form [type=submit]').prop('disabled', 'true')
 				return false
 			} else {
-				Helper(form).f('[type=submit]').removeAttr('disabled')
+				TS(form, 'form [type=submit]').removeAttr('disabled')
 			}
 		})
 	}
@@ -84,14 +58,9 @@ let updateActiveTab = tabNo => {
     })
 }
 
-let showContextMenu = (n, i, x, y) => {
-	Helper(n).o.contextMenu.setAbsolutePosition(x, y)
-	Helper(n).q('contextMenu .mdc-list-item__text').html(i)
-	Helper(n).o.contextMenu.open = Helper(n).o.contextMenu.open ? 0 : 1
-}
-
 const initialize = () => {
     updateActiveTab(defaultTab)
+	forms.update(1, 0)
 	forms.update(2, 0)
 	forms.update(3, 0)
 
@@ -101,36 +70,22 @@ const initialize = () => {
 
     $('.mainContent').on('contextmenu', () => { return false })
 
-    $('.tabContainer tbody tr').on('contextmenu', e => {
-		let bInfo = $(e.target).parent().attr('data-bInfo')
-		switch (parseInt($(e.target).parents('.tabContainer').attr('data-tab'))) {
-			case 1:
-				showContextMenu(1, bInfo, e.pageX, e.pageY)
-				break
-			case 2:
-				showContextMenu(2, bInfo, e.pageX, e.pageY)
-				break
-			case 3:
-				showContextMenu(3, bInfo, e.pageX, e.pageY)
-				break
-		}
-        
-    })
-
 	$('.dataFormSection_buttonContainer_addButton').on('click', e => {
 		forms.update(parseInt($(e.target).parents('.tabContainer').attr('data-tab')), 1)
 	})
 
 	$('.dataFormSection_buttonContainer_clearButton').on('click', e => {
-		forms.clear()
+		forms.clear($(e.target).parents('.tabContainer').attr('data-tab'))
 	})
 
-	Helper(3).f('input').on('input', () => {
-		forms.updateSubmitBtn(3)
+	$('.dataFormSection .formFooter [type=button]').on('click', e => {
+		forms.update($(e.target).parents('.tabContainer').attr('data-tab'), 0)
+		forms.clear($(e.target).parents('.tabContainer').attr('data-tab'))
 	})
 
-	Helper(2).f('input').on('input', () => {
-		forms.updateSubmitBtn(2)
+	$('.dataFormSection input').on('input', e => {
+		
+		forms.updateSubmitBtn($(e.target).parents('.tabContainer').attr('data-tab'))
 	})
 }
 
