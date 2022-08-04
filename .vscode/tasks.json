@@ -4,13 +4,13 @@
 		{
 			"label": "Sass Watch",
 			"type": "shell",
-			"command": "sass --watch src/client/sass/:public/",
+			"command": "sass --watch src/client/sass/:public/css",
 			"problemMatcher": []
 		},
 		{
 			"label": "Build",
 			"type": "shell",
-			"command": "sass src/client/sass/:public/ --style compressed && pug src/client/views/index.pug --out public",
+			"command": "npm build",
 			"problemMatcher": []
 		}
 	]

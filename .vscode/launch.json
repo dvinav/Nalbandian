@@ -8,16 +8,15 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Run Dev Server",
-			"skipFiles": [
-				"<node_internals>/**"
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"run",
+				"test"
 			],
-			"program": "${workspaceFolder}/dist/server.js",
-			"args": ["dev"],
 			"serverReadyAction": {
 				"action": "openExternally",
 				"uriFormat": "http://localhost:%s"
-			},
-			"preLaunchTask": "tsc: build - tsconfig.json"
+			}
 		}
 	]
 }

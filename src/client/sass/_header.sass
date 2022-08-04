@@ -15,10 +15,11 @@ header
 		flex: 1
 		align-items: center
 	.headerLeft 
-		padding-top: 7px
-		h2 
-			margin-left: 20px 
-			font-weight: 500
+		display: flex
+		align-items: center
+		span
+			font-size: 30px 
+			margin-left: 25px 
 	.headerRight
 		flex-direction: row-reverse
 		
@@ -37,10 +38,13 @@ header
 	cursor: pointer 
 	transition: all 150ms ease 
 	height: 100% 
-	span 
+	& > span 
 		font-size: 17px 
 		display: inline-flex 
 		pointer-events: none 
+		align-items: center
+		span.material-icons-round
+			padding-bottom: 4px
 	&:hover 
 		background: #f9f9f9 
 

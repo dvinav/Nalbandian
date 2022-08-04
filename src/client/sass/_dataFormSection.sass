@@ -7,7 +7,7 @@
 	padding: 25px 
 	height: 100vh - var.$header-height
 	overflow-y: auto
-	button[type=submit] 
+	button
 		height: 56px
 	& > *,
 	& > form > *
@@ -23,12 +23,18 @@
 		height: 56px 
 		@include Center
 		font-size: 15px
+		padding-top: 9px
+		* 
+			vertical-align: middle
 		i
 			font-size: 19px
-			padding-bottom: 4px
 			padding-right: 4px
+			padding-bottom: 4px
 	
 
 .activeTabContainer 
 	opacity: 1 
 	pointer-events: initial 
+
+.form-floating label
+	margin-top: 2px

@@ -18,7 +18,7 @@ mixin Select(form, select_name, select_label, select_icon)
 mixin Button(button_label, button_icon, button_type='button')
 	button.btn(type=button_type, class!=attributes.class)
 		i.material-icons-round(aria-hidden='true')= button_icon
-		=button_label
+		span= button_label
 
 mixin SearchBox()
 	form.searchBox_form

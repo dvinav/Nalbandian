@@ -13,7 +13,7 @@ const forms = {
 				TS(tab, `form select`).attr('disabled', '')
 				TS(tab, `.formFooter button`).attr('disabled', true)
 				TS(tab, `.dataFormSection_buttonContainer_addButton`).removeAttr('disabled')
-				forms.clear()
+				forms.clear(tab)
 				break
 			case 1:
 				TS(tab, `form`).attr('data-mode', 'add')
@@ -88,5 +88,6 @@ const initialize = () => {
 		forms.updateSubmitBtn($(e.target).parents('.tabContainer').attr('data-tab'))
 	})
 }
+
 
 $(() => initialize())
