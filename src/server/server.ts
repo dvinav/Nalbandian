@@ -17,10 +17,15 @@ Database.Connect().then(() => {
 
 	app.use(bodyParser.json())
 
-	app.post('/request', (req, res) => {
+	app.post('/request', async (req, res) => {
 		switch(req.body.action) {
 			case 'add':
-				Database.Actions.Insert(parseInt(req.body.collection), req.body.formData)
+				Database.Actions.Insert(parseInt(req.body.collection), req.body.formData, function(data: any) {
+					res.send(data)
+				})
+				break
+			case 'getMany':
+				Database.Actions.GetMany(req.body.count, req.body.collection, (data: any) => res.send(data))
 				break
 		}
 		

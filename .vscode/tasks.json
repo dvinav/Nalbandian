@@ -4,13 +4,19 @@
 		{
 			"label": "Sass Watch",
 			"type": "shell",
-			"command": "sass --watch src/client/sass/:public/css",
+			"command": "sass --watch src/client/sass/:public/",
+			"problemMatcher": []
+		},
+		{
+			"label": "Webpack Watch",
+			"type": "shell",
+			"command": "npx webpack",
 			"problemMatcher": []
 		},
 		{
 			"label": "Build",
 			"type": "shell",
-			"command": "npm build",
+			"command": "npm run build",
 			"problemMatcher": []
 		}
 	]

@@ -1,20 +1,25 @@
-@use 'variables' as var
-@use 'header'
-@use 'dataFormSection'
-@use 'mainContent'
-@use 'contextMenu'
+$header-height: 70px
+$header-color: #534f5a
+$primary: #3F51B5
+$link-color: $primary
+$formContainer-width: 22%
+	
+@import 'bootstrap'
+@import 'header'
+@import 'formContainer'
+@import 'tableContainer'
+@import 'contextMenu'
 @import 'mixins'
 
 body,
 html 
 	margin: 0 
-	font-family: 'DejaVu Sans', sans-serif
+	font-family: Arial, Helvetica, sans-serif
 
 .tabContainer 
-	width: 100% 
-	display: flex 
-	min-height: 200vh 
-	flex-wrap: wrap 
+	width: 100vw
+	display: flex
+	height: calc(100vh - $header-height)
 	position: fixed 
 	pointer-events: none 
 	transition: all 200ms ease-out
@@ -22,25 +27,28 @@ html
 	
 .activeTabContainer 
 	opacity: 1 
-	pointer-events: initial 
+	pointer-events: initial
 
+.material-icons-round
+	user-select: none
+	vertical-align: middle
+	line-height: 0 !important
+	position: relative
+	top: -1px
+
+.row
+	margin-top: initial
+	margin-right: initial
+	margin-left: initial
 
 .searchBox 
-	width: 100% 
-	border-radius: 0 
-	display: flex
-	height: 50px
-	i
-		width: 40px
-		@include Center
-	input 
-		outline: none
-		font-size: 20px 
-		flex: 10
-		border: none
-
-
-
-i.material-icons 
-	user-select: none
-
+	.input-group-text
+		background: #fff
+		border-right: none
+		border-left: none
+	input
+		border-left: none
+		& > :focus
+			border-color: #ced4da
+	& > *
+		border-radius: 0

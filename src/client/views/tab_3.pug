@@ -1,29 +1,44 @@
-.dataFormSection
-	.dataFormSection_buttonContainer
-		+Button('Ավելացնել', 'add',)(class='btn-secondary dataFormSection_buttonContainer_addButton')
-		+Button('Մաքրել', 'clear',)(class='btn-secondary dataFormSection_buttonContainer_clearButton')
+.formContainer
 	form
-		+TextField('book', 'title', 'Վերնագիր*', 'title', true)
-		+TextField('book', 'subtitle', 'Խորագիր*', 'text_fields', true)
-		+TextField('book', 'author', 'Հեղինակ (ներ)*', 'edit', true)
-		+TextField('book', 'publishing', 'Հրատարակչություն*', 'publish', true)
-		+TextField('book', 'publishDate', 'Հրատարակչության Թվական*', 'date_range', true)
-		+TextField('book', 'publishLocation', 'Հրատարակչության Վայր*', 'location_city', true)
-		+TextField('book', 'translator', 'Թարգմանիչ', 'translate')
-		+TextField('book', 'ISBN', 'ISBN*', 'fingerprint', true)
-		+TextField('book', 'code', 'Կոդ*', '123', true)
-		+Select('book', 'language', 'Լեզու', 'language')
-			option(value='hy' selected) Հայերեն
-			option(value='fa') Պարսկերեն
-			option(value='en') Անգլերեն
-		+TextField('book', 'ebook', 'Էլ-Գրքի Հասցե', 'link')
-		
-		.formFooter
-			+Button('Չեղարկել', 'clear')(class='btn-danger')
-			+Button('Հաստատել', 'check', 'submit')(class='btn-primary')
-.mainContent.mainContent_books
+		.container.p-2
+			+Row()
+				.col
+					+Button('Ավելացնել', 'add',)(class='btn-primary addBtn')
+				.col
+					+Button('Մաքրել', 'clear',)(class='btn-primary clearBtn')
+			+Row()
+				+TextField('title', 'Վերնագիր', 'title')
+			+Row()
+				+TextField('subtitle', 'Խորագիր', 'text_fields')
+			+Row()
+				+TextField('author', 'Հեղինակ (ներ)', 'edit')
+			+Row()
+				+TextField('publishing', 'Հրատարակչություն', 'publish')
+			+Row()
+				+TextField('publishDate', 'Հրատարակչության Թվական', 'date_range')
+			+Row()
+				+TextField('publishLocation', 'Հրատարակչության Վայր', 'location_city')
+			+Row()
+				+TextField('translator', 'Թարգմանիչ', 'translate')
+			+Row()
+				+TextField('ISBN', 'ISBN*', 'fingerprint', true)
+			+Row()
+				+TextField('code', 'Կոդ*', '123', true)
+			+Row()
+				+Select('language', 'language')
+					option(value='hy' selected) Հայերեն
+					option(value='fa') Պարսկերեն
+					option(value='en') Անգլերեն
+			+Row()
+				+TextField('ebook', 'Էլ-Գրքի Հասցե', 'link')
+			+Row()
+				.col
+					+Button('Չեղարկել', 'clear')(class='btn-danger')
+				.col
+					+Button('Հաստատել', 'check', 'submit')(class='btn-success')
+.tableContainer
 	+SearchBox()
-	table
+	table.table.table-striped.table-hover
 		colgroup
 			col(span='1', style='width: 4%;')
 			col(span='1', style='width: 27%;')
@@ -43,4 +58,3 @@
 				th
 					span.material-icons-round laptop_chromebook
 		tbody
-			include sampleData_books.pug

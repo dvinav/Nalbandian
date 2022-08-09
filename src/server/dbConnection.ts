@@ -16,6 +16,11 @@ const ColName = (n: number): string => {
 }
 
 export const Database = {
+	Index: {
+		1: 0,
+		2: 0,
+		3: 0
+	},
 	Connect: async function() {
 		try {
 			await client.connect()
@@ -26,22 +31,35 @@ export const Database = {
 		}
 	},
 	Actions: {
-		Insert: async (collection: number, data: object) => {
+		Insert: (collection: number, data: object, callback: any) => {
+			client.db(database).collection(ColName(collection)).insertOne(data, (err, res) => {
+				if (err) {
+					throw ` × Error inserting document: ${err}`
+				} else {
+					console.log('\x1b[32m', `+ Data inserted in collection "${ColName(collection)}"`)
+					callback(res)
+				}
+			})
+		},
+		GetMany: async (num: number, col: number, callback: any) => {
+			// Database.Index[]
 			try {
-				await client.db(database).collection(ColName(collection)).insertOne(data)
-				console.log('\x1b[32m', `+ Data inserted in collection "${ColName(collection)}"`)
+				callback(await client.db(database).collection(ColName(col)).find().sort({ _id: -1 }).limit(num).toArray())
+				console.log('\x1b[32m', `+ ${num} documents retrieved from collection ${ColName(col)}`)
+				return true
 			} catch (err) {
-				console.error(err)
+				console.error(`1 Error: ${err}`)
 			}
+			
 		}
 	}
-	// edit: (collection, id, data) => {
+	/* edit: (collection, id, data) => {
 
-	// },
-	// delete: (collection, id) => {
+	},
+	delete: (collection, id) => {
 
-	// },
-	// get: (collection, count) => {
+	},
+	get: (collection, count) => {
 
-	// }
+	} */
 }

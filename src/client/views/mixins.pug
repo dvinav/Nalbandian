@@ -1,30 +1,40 @@
-mixin TextField(form, input_name, input_label, input_icon, req=false)
-	.input-group.mb-3
-			span.input-group-text 
-				i.material-icons-round(tabindex='0', role='button')= input_icon
-			.form-floating
-				input.form-control(type='text', name=input_name, id='input-'+form+'-'+input_name, placeholder=input_label, required=req)
-				label(for='input-'+form+'-'+input_name)= input_label
+mixin TextField(input_name, input_label, input_icon, req=false)
+	.input-group
+		span.input-group-text
+			i.material-icons-round(tabindex='0', role='button')= input_icon
+		input.form-control(type='text', name=input_name, placeholder=input_label, required=req)
 
-mixin Select(form, select_name, select_label, select_icon)
-	.input-group.mb-3
+	//- .input-group
+	//- 	span.input-group-text 
+	//- 		i.material-icons-round(tabindex='0', role='button')= input_icon
+	//- 	.form-floating
+	//- 		input.form-control(type='text', name=input_name, id='input-'+form+'-'+input_name, placeholder=input_label, required=req)
+	//- 		label(for='input-'+form+'-'+input_name)= input_label
+
+mixin Select(select_name, select_icon)
+	.input-group
 		span.input-group-text
 			i.material-icons(tabindex='0', role='button')= select_icon
-		.form-floating
-			select.form-select(id='input-'+form+'-'+input_name,)
-				block
-			label(for='input-'+form+'-'+input_name)= select_label
+		select.form-select(id='input-'+form+'-'+input_name,)
+			block
 
 mixin Button(button_label, button_icon, button_type='button')
 	button.btn(type=button_type, class!=attributes.class)
-		i.material-icons-round(aria-hidden='true')= button_icon
+		i.material-icons-round.me-1(aria-hidden='true')= button_icon
 		span= button_label
 
 mixin SearchBox()
-	form.searchBox_form
-		.searchBox
-			i.material-icons(tabindex='0', role='button') search
-			input(type='text', placeholder='Որոնել')
+	.searchBox.input-group
+		span.input-group-text
+			i.material-icons-round(tabindex='0', role='button') search
+		input.form-control.shadow-none(type='text', name='query', placeholder='Որոնել')
+		//- .searchBox
+		//- 	i.material-icons(tabindex='0', role='button') search
+		//- 	input(type='text', placeholder='Որոնել')
+
+mixin Row()
+	.row.g-2
+		block
 
 mixin ContextMenu(infoRow)
 	.contextMenu
@@ -38,3 +48,9 @@ mixin ContextMenu(infoRow)
 			.contextMenuRow
 				button(class='contextMenu_edit')
 				button(class='contextMenu_delete')
+
+mixin FileInput(name, label, icon)
+	.input-group
+		span.input-group-text
+			i.material-icons(tabindex='0', role='button')= icon
+		input.form-control(type='file')

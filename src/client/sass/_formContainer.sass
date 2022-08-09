@@ -1,0 +1,14 @@
+@import 'mixins'
+
+.formContainer
+	flex: 0 0 $formContainer-width
+	// width: $formContainer-width
+	border-right: 1px solid $gray-400
+	height: calc(100vh - $header-height)
+	overflow-y: auto
+	button
+		width: 100%
+		i
+			font-size: 1.3rem
+	input[type='file']::file-selector-button 
+		display: none

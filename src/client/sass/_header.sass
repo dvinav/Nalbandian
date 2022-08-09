@@ -1,27 +1,26 @@
-@use 'variables' as var
 @import 'mixins'
 
 header  
 	display: flex 
-	align-items: center 
-	height: var.$header-height 
+	height: $header-height 
 	width: 100% 
-	border-bottom: 1px solid var(--bs-gray-400) 
+	border-bottom: 1px solid $gray-400
 	user-select: none 
-	color: var.$header-color
+	color: $gray-900
 	& > *
 		display: flex 
 		height: 100% 
 		flex: 1
 		align-items: center
-	.headerLeft 
-		display: flex
-		align-items: center
+	.headerLeft
+		flex: 1 
 		span
-			font-size: 30px 
+			line-height: 27px
+			font-size: 27px 
 			margin-left: 25px 
 	.headerRight
 		flex-direction: row-reverse
+		flex: 1
 		
 
 .headerCenter
@@ -43,13 +42,11 @@ header
 		display: inline-flex 
 		pointer-events: none 
 		align-items: center
-		span.material-icons-round
-			padding-bottom: 4px
 	&:hover 
 		background: #f9f9f9 
 
-.headerCenter_bottomBorder 
-	background: var(--accent-primary) 
+.tabIndicator
+	background: $primary
 	width: 23.333% 
 	height: 5px 
 	align-self: flex-end 
@@ -58,7 +55,7 @@ header
 	transition: 200ms
 
 .activeTabBtn 
-	color: var(--accent-primary) 
+	color: $primary
 	font-weight: bold 
 
 .headerExitButton 
@@ -75,4 +72,4 @@ header
 	&:active
 		background: #00000020
 	.material-icons-round
-		color: var.$header-color
+		color: $header-color

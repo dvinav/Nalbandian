@@ -1,21 +1,43 @@
-.dataFormSection
-	.dataFormSection_buttonContainer
-		+Button('Ավելացնել', 'add',)(class='btn-secondary dataFormSection_buttonContainer_addButton')
-		+Button('Մաքրել', 'clear',)(class='btn-secondary dataFormSection_buttonContainer_clearButton')
+.formContainer
 	form
-		+TextField('members', 'name', 'Անուն*', 'person', true)
-		+TextField('members', 'surname', 'Ազգանուն*', 'people', true)
-		+TextField('members', 'birthdate', 'Ծննդյան Թվական*', 'date_range', true)
-		+TextField('members', 'phone', 'Բջջային Համար*', 'smartphone', true)
-		+TextField('members', 'home', 'Տան Համար', 'phone', true)
-		+TextField('members', 'address', 'Հասցե', 'home', true)
-		+TextField('members', 'memberCode', 'Կոդ*', '123', true)
-		.formFooter
-			+Button('Չեղարկել', 'clear')(class='btn-danger')
-			+Button('Հաստատել', 'check', 'submit')(class='btn-primary')
-.mainContent.mainContent_books
+		.container.p-2
+			+Row()
+				.col
+					+Button('Ավելացնել', 'add',)(class='btn-primary formSection_addBtn')
+				.col
+					+Button('Մաքրել', 'clear',)(class='btn-primary formSection_clearBtn')
+			+Row()
+				.col
+					+TextField('name', 'Անուն*', 'person', true)
+			+Row()
+				.col
+					+TextField('surname', 'Ազգանուն*', 'people', true)
+			+Row()
+				.col
+					+TextField('birthdate', 'Ծննդյան Թվական*', 'date_range')
+			+Row()
+				.col
+					+TextField('phone', 'Բջջային Համար*', 'smartphone', true)
+			+Row()
+				.col
+					+TextField('home', 'Տան Համար', 'phone')
+			+Row()
+				.col
+					+TextField('address', 'Հասցե', 'home')
+			+Row()
+				.col
+					+FileInput('picture', 'Պատկեր', 'portrait')
+			+Row()
+				.col
+					+TextField('code', 'Կոդ*', '123', true)
+			+Row()
+				.col
+					+Button('Չեղարկել', 'clear')(class='btn-danger')
+				.col
+					+Button('Հաստատել', 'check', 'submit')(class='btn-success')
+.tableContainer
 	+SearchBox()
-	table
+	table.table.table-striped.table-hover
 		colgroup
 			col(span='1', style='width: 20%')
 			col(span='1', style='width: 30%')
@@ -28,4 +50,3 @@
 				th Ազգանուն
 				th Կոդ
 		tbody
-			include sampleData_members.pug

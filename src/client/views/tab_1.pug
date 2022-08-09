@@ -1,16 +1,23 @@
-.dataFormSection
-	.dataFormSection_buttonContainer
-		+Button('Հանձնել', 'add',)(class='btn-secondary dataFormSection_buttonContainer_addButton')
-		+Button('Մաքրել', 'clear',)(class='btn-secondary dataFormSection_buttonContainer_clearButton')
+.formContainer
 	form
-		+TextField('borrowed', 'member', 'Անդամ*', 'person', true)
-		+TextField('borrowed', 'book', 'Գիրք*', 'date_range', true)
-		.formFooter
-			+Button('Չեղարկել', 'clear')(class='btn-danger')
-			+Button('Հաստատել', 'check', 'submit')(class='btn-primary')
-.mainContent.mainContent_borrowed
+		.container.p-2
+			+Row()
+				.col
+					+Button('Ավելացնել', 'add',)(class='btn-primary formSection_addBtn')
+				.col
+					+Button('Մաքրել', 'clear',)(class='btn-primary formSection_clearBtn')
+			+Row()
+					+TextField('member', 'Անդամ*', 'person', true)
+			+Row()
+					+TextField('book', 'Գիրք*', 'date_range', true)
+			+Row()
+				.col
+					+Button('Չեղարկել', 'clear')(class='btn-danger')
+				.col
+					+Button('Հաստատել', 'check', 'submit')(class='btn-success')
+.tableContainer
 	+SearchBox()
-	table
+	table.table.table-striped.table-hover
 		colgroup
 			col(span='1', style='width: 5%')
 			col(span='1', style='width: 25%')
@@ -27,4 +34,3 @@
 				th Ժամկետ
 				th Վերադարձում
 		tbody
-			include sampleData_borrowed.pug
