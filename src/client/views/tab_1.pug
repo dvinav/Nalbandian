@@ -3,9 +3,9 @@
 		.container.p-2
 			+Row()
 				.col
-					+Button('Ավելացնել', 'add',)(class='btn-primary formSection_addBtn')
+					+Button('Ավելացնել', 'add')(class='btn-primary addBtn')
 				.col
-					+Button('Մաքրել', 'clear',)(class='btn-primary formSection_clearBtn')
+					+Button('Մաքրել', 'clear')(class='btn-primary clearBtn')
 			+Row()
 					+TextField('member', 'Անդամ*', 'person', true)
 			+Row()
@@ -34,3 +34,5 @@
 				th Ժամկետ
 				th Վերադարձում
 		tbody
+
++Toast('success', 'Գրանցվեց', 'borrowedSuccessToast')

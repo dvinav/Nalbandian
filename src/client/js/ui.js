@@ -1,4 +1,5 @@
-const defaultTab = 3
+import { Toast, Modal } from 'bootstrap'
+const defaultTab = 2
 
 const Forms = {
 	Init: () => {
@@ -28,9 +29,14 @@ const Forms = {
 	},
 	Clear: () => $(`.activeTabContainer form input`).val(''),
 	UpdateSubmitBtn: () => {
-		$(`.activeTabContainer form [required]`).each((i, e) => {
-			if($(e).val() == '') $(`.activeTabContainer form [type=submit]`).attr('disabled', true)
-			else $(`.activeTabContainer form [type=submit]`).removeAttr('disabled')
+		$(`.activeTabContainer form [required]`).each(function() {
+			if ($(this).val() == '') {
+				$(`.activeTabContainer form [type=submit]`).attr('disabled', true)
+				return false
+			}
+			else  {
+				$(`.activeTabContainer form [type=submit]`).removeAttr('disabled')
+			}
 		})
 	}
 }
@@ -56,8 +62,8 @@ const Table = {
 		},
 		Update: tab => {
 			Table.Index.Current[tab] = 1
-			$(`.tabContainer[data-tab=${tab}] table tbody tr`).each(function() {
-				$(this).children('td:first-child').html(Table.Index.Current[tab]++)
+			$(`.tabContainer[data-tab=${tab}] tbody tr`).each((i, e) => {
+				$(e).children('td:first-child').html(Table.Index.Current[tab]++)
 			})
 		}
 	},
@@ -96,7 +102,7 @@ const Table = {
 						<td>${doc.translator != '' ? doc.translator : '-'}</td>
 						<td>${doc.code}</td>
 						<td>
-							<a target="blank" href="${doc.ebook != null ? doc.ebook : ''}">
+							<a target="blank" ${doc.ebook != '' ? 'href="' + doc.ebook + '"' : 'class="disabled"'}>
 								<span class="material-icons-round">link</span>
 							</a>
 						</td>
@@ -131,7 +137,6 @@ const Table = {
 					</tr>`).insertBefore(`.tabContainer[data-tab=2] tbody tr:first-child`).on('ready', Table.Index.Update(2))
 				break
 			case 3:
-				console.log('tiri')
 				$(`<tr data-id="${id}">
 						<td>${Table.Index.Current[3]++}</td>
 						<td>${doc.title != '' ? doc.title : '-'}</td>
@@ -140,7 +145,7 @@ const Table = {
 						<td>${doc.translator != '' ? doc.translator : '-'}</td>
 						<td>${doc.code}</td>
 						<td>
-							<a target="blank" href="${doc.ebook != null ? doc.ebook : ''}">
+							<a target="blank" ${doc.ebook != '' ? 'href="' + doc.ebook + '"' : 'class="disabled"'}>
 								<span class="material-icons-round">link</span>
 							</a>
 						</td>
@@ -170,5 +175,9 @@ export const UI = {
 			if ($('.activeTabContainer .tableContainer').scrollTop() > 0) $('.activeTabContainer thead tr').addClass('thS')
 			else $('.activeTabContainer thead tr').removeClass('thS')
 		})
-	}
+
+		$('.toast').each((i, e) => new Toast(e))
+	},
+	Table: Table,
+	Forms: Forms,
 }

@@ -3,9 +3,9 @@
 		.container.p-2
 			+Row()
 				.col
-					+Button('Ավելացնել', 'add',)(class='btn-primary addBtn')
+					+Button('Ավելացնել', 'add')(class='btn-primary addBtn')
 				.col
-					+Button('Մաքրել', 'clear',)(class='btn-primary clearBtn')
+					+Button('Մաքրել', 'clear')(class='btn-primary clearBtn')
 			+Row()
 				+TextField('title', 'Վերնագիր', 'title')
 			+Row()
@@ -58,3 +58,5 @@
 				th
 					span.material-icons-round laptop_chromebook
 		tbody
+
++Toast('success', 'Գրանցվեց', 'bookSuccessToast')

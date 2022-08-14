@@ -1,10 +1,17 @@
-const path = require('path');
+const path = require('path')
 const webpack = require('webpack')
+const TerserPlugin = require("terser-webpack-plugin")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
 	mode: "development",
 	entry: path.resolve(__dirname, './src/client/js/main.js'),
-	devtool: "eval-source-map",
-	watch: true,
+	devtool: "source-map",
+	/* optimization: {
+		minimizer: [new TerserPlugin({
+			extractComments: false,
+		})],
+		minimize: true
+	}, */
 	module: {
 		rules: [
 			{
@@ -38,16 +45,9 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, './public/'),
-		filename: 'bundle.js',
-	},
-	devServer: {
-		contentBase: path.resolve(__dirname, './public/'),
-		hot: true
+		filename: 'bundle.js'
 	},
 	plugins: [
-		new webpack.ProvidePlugin({
-			$: "jquery",
-			jQuery: "jquery"
-		})
+		new webpack.ProvidePlugin({$: "jquery"})
 	]
 };

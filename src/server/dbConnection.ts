@@ -41,10 +41,10 @@ export const Database = {
 				}
 			})
 		},
-		GetMany: async (num: number, col: number, callback: any) => {
+		GetMany: async (num: number, col: number, skip: number, callback: any) => {
 			// Database.Index[]
 			try {
-				callback(await client.db(database).collection(ColName(col)).find().sort({ _id: -1 }).limit(num).toArray())
+				callback(await client.db(database).collection(ColName(col)).find().sort({ _id: -1 }).skip(--skip).limit(num).toArray())
 				console.log('\x1b[32m', `+ ${num} documents retrieved from collection ${ColName(col)}`)
 				return true
 			} catch (err) {

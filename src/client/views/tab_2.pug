@@ -3,9 +3,9 @@
 		.container.p-2
 			+Row()
 				.col
-					+Button('Ավելացնել', 'add',)(class='btn-primary formSection_addBtn')
+					+Button('Ավելացնել', 'add')(class='btn-primary addBtn')
 				.col
-					+Button('Մաքրել', 'clear',)(class='btn-primary formSection_clearBtn')
+					+Button('Մաքրել', 'clear')(class='btn-primary clearBtn')
 			+Row()
 				.col
 					+TextField('name', 'Անուն*', 'person', true)
@@ -26,7 +26,7 @@
 					+TextField('address', 'Հասցե', 'home')
 			+Row()
 				.col
-					+FileInput('picture', 'Պատկեր', 'portrait')
+					+FileInput('memberPicture', 'Պատկեր', 'portrait')
 			+Row()
 				.col
 					+TextField('code', 'Կոդ*', '123', true)
@@ -50,3 +50,5 @@
 				th Ազգանուն
 				th Կոդ
 		tbody
+
++Toast('success', 'Գրանցվեց', 'memberSuccessToast')

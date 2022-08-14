@@ -54,3 +54,11 @@ mixin FileInput(name, label, icon)
 		span.input-group-text
 			i.material-icons(tabindex='0', role='button')= icon
 		input.form-control(type='file')
+
+mixin Toast(bg, message, id)
+	.toast.align-items-center.text-white.border-0(role='alert' aria-live='assertive' aria-atomic='true' data-bs-delay='2000' class='bg-'+bg id=id)
+		.d-flex
+			.toast-body
+			= message
+			button.btn-close.btn-close-white.me-2.m-auto(type='button' data-bs-dismiss='toast')
+

@@ -7,6 +7,9 @@
 		position: sticky
 		top: 0
 		z-index: 3
+		input:focus
+			border-color: $gray-400
+			box-shadow: none
 	thead tr
 		position: sticky
 		top: 38px
@@ -18,3 +21,11 @@
 	tbody tr
 		.material-icons-round
 			z-index: -1
+	th:first-child,
+	td:first-child
+		text-align: center
+		color: $gray-700
+	a.disabled,
+	a.disabled span
+		color: $gray-400
+		pointer-events: none
