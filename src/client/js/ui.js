@@ -1,5 +1,10 @@
 import { Toast, Modal } from 'bootstrap'
-const defaultTab = 2
+const defaultTab = 3
+const toastOptions = {
+	animation: true,
+	autohide: true,
+	delay: 2000
+}
 
 const Forms = {
 	Init: () => {
@@ -42,6 +47,7 @@ const Forms = {
 }
 
 const Tab = {
+	Active: $('.activeTabContainer').data('tab'),
 	Switch: (tab, callback = () => {}) => {
 		$('.activeTabBtn').removeClass('activeTabBtn')
 		$('.activeTabContainer').removeClass('activeTabContainer')
@@ -70,21 +76,17 @@ const Table = {
 	InsertMany: (tab, data) => {
 		data.forEach(doc => {
 			switch (tab) {
-				/* case 1:
-					$(`.tabContainer[data-tab=${table}] table tbody`).append(`<tr>
-						<td>x</td>
-						<td>${doc.name != null ? doc.name : '-'}</td>
+				case 1:
+					$(`.tabContainer[data-tab=1] table tbody`).append(`<tr>
+						<td>${Table.Index.Current[1]++}</td>
+						<td>${doc.member != null ? doc.member : '-'}</td>
 						<td>${doc.book != null ? doc.book : '-'}</td>
-						<td>${doc.author != null ? doc.author : '-'}</td>
-						<td>${doc.translator != null ? doc.translator : '-'}</td>
-						<td>${doc.code}</td>
-						<td>
-							<a target="blank" href="${doc.ebook != null ? doc.ebook : ''}">
-								<span class="material-icons-round">link</span>
-							</a>
-						</td>
+						<td>sdfsdfsdf</td>
+						<td>sdfsdfdsf</td>
+						<td>sdfsdfdsf</td>
+
 					</tr>`)
-					break */
+					break
 				case 2:
 					$(`.tabContainer[data-tab=2] table tbody`).append(`<tr data-id="${doc._id}">
 						<td>${Table.Index.Current[2]++}</td>
@@ -115,7 +117,7 @@ const Table = {
 		switch (parseInt(tab)) {
 			case 1:
 				$(`<tr>
-					<td>x</td>
+					<td>${Table.Index.Current[1]++}</td>
 					<td>${doc.name != null ? doc.name : '-'}</td>
 					<td>${doc.book != null ? doc.book : '-'}</td>
 					<td>${doc.author != null ? doc.author : '-'}</td>
@@ -152,7 +154,8 @@ const Table = {
 					</tr>`).insertBefore(`.tabContainer[data-tab=3] tbody tr:first-child`).on('ready', Table.Index.Update(3))
 				break
 		}
-	}
+	},
+	Clear: () => $(`.activeTabContainer tbody`).empty()
 }
 
 export const UI = {
@@ -170,14 +173,8 @@ export const UI = {
 		$('.formContainer .btn-danger').on('click', e => Forms.Update(0))
 
 		$('form').on('input', Forms.UpdateSubmitBtn)
-
-		$('.tableContainer').on('scroll', () => {
-			if ($('.activeTabContainer .tableContainer').scrollTop() > 0) $('.activeTabContainer thead tr').addClass('thS')
-			else $('.activeTabContainer thead tr').removeClass('thS')
-		})
-
-		$('.toast').each((i, e) => new Toast(e))
 	},
+	ActiveTab: Tab.Active,
 	Table: Table,
 	Forms: Forms,
 }

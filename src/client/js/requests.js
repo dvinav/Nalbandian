@@ -1,52 +1,42 @@
-const SendRequest = async (data, callback) => {
-	await $.ajax({
-		type: 'POST',
-		url: '/request',
-		processData: false,
-		contentType: 'application/json; charset=utf-8',
-		data: JSON.stringify(data),
-		success: function (res) {
-			callback(res) 
-		}
-	}).fail(err => console.log('Error'))
-}
-
-const Upload = async (data, callback) => {
-	await $.ajax({
-		type: 'POST',
-		url: '/upload',
-		processData: false,
-		contentType: 'multipart/form-data',
-		data: data,
-		success: function (res) {
-			callback(res) 
-		}
-	}).fail(err => console.log('Error'))
-}
-
 export const Requests = {
 	GetMany: (count, col, skip, callback = () => {}) => {
-		SendRequest({
-			action: 'getMany',
-			count: count,
-			collection: col,
-			skip: skip
-		}, data => callback(data))
-	},
-	Add: (data, col, callback, file = false) => {
-		console.log(data)
-		SendRequest({
-			action: 'add',
-			collection: col,
-			data: data
-		}, data => { 
-			if (file) {
-				var formData = new FormData()
-				formData.append(file)
-				Upload(formData)
-			}
-			callback(data)
+		fetch('/get', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify({
+				action: 'getMany',
+				count: count,
+				collection: col,
+				skip: skip
+			})
 		})
-		
-	}
+			.then(res => res.json())
+			.then(data => callback(data))
+	},
+	Add: async (fd, callback) => {
+		fetch('/upload', {
+			method: 'POST',
+			body: fd
+		})
+			.then(res => res.text())
+			.then(data => callback(data))
+	},
+	GetByQuery: (query, col, callback = () => { }) => {
+		fetch('/get', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify({
+				action: 'getByQuery',
+				query: query,
+				collection: col,
+			})
+		})
+			.then(res => res.json())
+			.then(data => callback(data))
+	},
+
 }

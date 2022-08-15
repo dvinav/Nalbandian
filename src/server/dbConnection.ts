@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb'
 const database = 'Nalbandian'
 const client = new MongoClient('mongodb://Ararat:jcu3CV2JXX7u@127.0.0.1:27017/')
+const db = client.db(database)
 
 const ColName = (n: number): string => {
 	switch (n) {
@@ -16,41 +17,72 @@ const ColName = (n: number): string => {
 }
 
 export const Database = {
-	Index: {
-		1: 0,
-		2: 0,
-		3: 0
+	Init: () => {
+		console.log('\x1b[36m', '- Initializing database...')
+		db.createCollection("Books", (err, res) => {
+			if (err) throw err
+			db.createCollection("Members", (err, res) => {
+				if (err) throw err
+				db.createCollection("Borrowed", (err, res) => {
+					if (err) throw err
+					console.log('\x1b[32m', `+ 3 collections successfully created!`)
+					Database.CreateIndexes()
+				})
+			})
+		})
+	},
+	CreateIndexes: async () => {
+		console.log('\x1b[36m', '- Creating Indexes...')
+		await db.collection('Books').createIndex({ "$**": "text" }, { language_override: 'l' })
+		await db.collection('Members').createIndex({ "$**": "text" }, { language_override: 'l' })
+		await db.collection('Borrowed').createIndex({ "$**": "text" }, { language_override: 'l' })
+		console.log('\x1b[36m', '- Indexes created!')
+		client.close()
 	},
 	Connect: async function() {
 		try {
 			await client.connect()
-			await client.db(database).command({ ping: 1 })
+			await db.command({ ping: 1 })
 			console.log('\x1b[37m', '- Connected successfully to MongoDB server')
 		} catch (err) {
 			console.error(err)
 		}
 	},
 	Actions: {
-		Insert: (collection: number, data: object, callback: any) => {
-			client.db(database).collection(ColName(collection)).insertOne(data, (err, res) => {
-				if (err) {
-					throw ` × Error inserting document: ${err}`
-				} else {
-					console.log('\x1b[32m', `+ Data inserted in collection "${ColName(collection)}"`)
-					callback(res)
-				}
-			})
+		Insert: async (data: any, callback: any) => {
+			var col = ColName(parseInt(data.collection))
+			delete data.collection
+			try {
+				db.collection(col).insertOne(data, (err, res) => {
+					if (err) {
+						throw ` × Error inserting document: ${err}`
+					} else {
+						console.log('\x1b[32m', `+ Data inserted in collection "${col}"`)
+						callback(res?.insertedId)
+					}
+				})
+			} catch (err) {
+				console.error(`1 Error: ${err}`)
+			}
 		},
 		GetMany: async (num: number, col: number, skip: number, callback: any) => {
-			// Database.Index[]
 			try {
-				callback(await client.db(database).collection(ColName(col)).find().sort({ _id: -1 }).skip(--skip).limit(num).toArray())
+				callback(await db.collection(ColName(col)).find().sort({ _id: -1 }).skip(--skip).limit(num).toArray())
 				console.log('\x1b[32m', `+ ${num} documents retrieved from collection ${ColName(col)}`)
 				return true
 			} catch (err) {
 				console.error(`1 Error: ${err}`)
 			}
-			
+		},
+		GetByQuery: async (query: string, col: number, callback: any) => {
+			try {
+				var result = await db.collection(ColName(col)).find({ $text: { $search: query } }).toArray()
+				callback(result)
+				console.log('\x1b[32m', `+ ${result.length} documents retrieved from collection ${ColName(col)}`)
+				return true
+			} catch (err) { 
+				console.error(`1 Error: ${err}`)
+			}
 		}
 	}
 	/* edit: (collection, id, data) => {
@@ -63,3 +95,5 @@ export const Database = {
 
 	} */
 }
+
+// db.collection(ColName(col)).createIndex({ "$**": "text" }, { default_language: "spanish" })

@@ -1,5 +1,5 @@
 .formContainer
-	form
+	form(enctype="multipart/form-data")
 		.container.p-2
 			+Row()
 				.col
@@ -58,5 +58,3 @@
 				th
 					span.material-icons-round laptop_chromebook
 		tbody
-
-+Toast('success', 'Գրանցվեց', 'bookSuccessToast')

@@ -1,5 +1,5 @@
 .formContainer
-	form
+	form(enctype="multipart/form-data")
 		.container.p-2
 			+Row()
 				.col
@@ -34,5 +34,3 @@
 				th Ժամկետ
 				th Վերադարձում
 		tbody
-
-+Toast('success', 'Գրանցվեց', 'borrowedSuccessToast')

@@ -48,6 +48,6 @@ module.exports = {
 		filename: 'bundle.js'
 	},
 	plugins: [
-		new webpack.ProvidePlugin({$: "jquery"})
+		new webpack.ProvidePlugin({ $: 'jquery/dist/jquery.slim'})
 	]
 };
