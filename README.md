@@ -1,7 +1,7 @@
 ## Create users:
 
 ```shell
-use
+use admin
 
 db.createUser(
 {	user: "Ararat",
