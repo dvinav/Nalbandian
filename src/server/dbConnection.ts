@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 const database = 'Nalbandian'
 const client = new MongoClient('mongodb://Ararat:jcu3CV2JXX7u@127.0.0.1:27017/')
 const db = client.db(database)
@@ -39,17 +39,18 @@ export const Database = {
 		console.log('\x1b[36m', '- Indexes created!')
 		client.close()
 	},
-	Connect: async function() {
+	Connect: async (next: Function) => {
 		try {
 			await client.connect()
 			await db.command({ ping: 1 })
+			next()
 			console.log('\x1b[37m', '- Connected successfully to MongoDB server')
 		} catch (err) {
 			console.error(err)
 		}
 	},
 	Actions: {
-		Insert: async (data: any, callback: any) => {
+		Insert: async (data: any, callback: Function) => {
 			var col = ColName(parseInt(data.collection))
 			delete data.collection
 			try {
@@ -65,7 +66,7 @@ export const Database = {
 				console.error(`1 Error: ${err}`)
 			}
 		},
-		GetMany: async (num: number, col: number, skip: number, callback: any) => {
+		GetMany: async (num: number, col: number, skip: number, callback: Function) => {
 			try {
 				callback(await db.collection(ColName(col)).find().sort({ _id: -1 }).skip(--skip).limit(num).toArray())
 				console.log('\x1b[32m', `+ ${num} documents retrieved from collection ${ColName(col)}`)
@@ -74,7 +75,7 @@ export const Database = {
 				console.error(`1 Error: ${err}`)
 			}
 		},
-		GetByQuery: async (query: string, col: number, callback: any) => {
+		GetByQuery: async (query: string, col: number, callback: Function) => {
 			try {
 				var result = await db.collection(ColName(col)).find({ $text: { $search: query } }).toArray()
 				callback(result)
@@ -83,6 +84,17 @@ export const Database = {
 			} catch (err) { 
 				console.error(`1 Error: ${err}`)
 			}
+		},
+		Delete: async (col: number, id: number, callback: Function) => {
+			try {
+				db.collection(ColName(col)).deleteOne({ _id: new ObjectId(id) })
+				callback(true)
+				console.log('\x1b[32m', `+ Document ${id} was deleted from collection ${ColName(col)}`)
+				return true
+			} catch (err) {
+				console.error(`1 Error: ${err}`)
+			}
+			
 		}
 	}
 	/* edit: (collection, id, data) => {

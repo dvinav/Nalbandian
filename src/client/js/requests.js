@@ -1,6 +1,20 @@
 export const Requests = {
+	Delete: (col, id, callback) => {
+		fetch('/request', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify({
+				action: 'delete',
+				collection: col,
+				id: id
+			})
+		})
+			.then(() => callback(id))
+	},
 	GetMany: (count, col, skip, callback = () => {}) => {
-		fetch('/get', {
+		fetch('/request', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -24,7 +38,7 @@ export const Requests = {
 			.then(data => callback(data))
 	},
 	GetByQuery: (query, col, callback = () => { }) => {
-		fetch('/get', {
+		fetch('/request', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json;charset=utf-8'
@@ -38,5 +52,18 @@ export const Requests = {
 			.then(res => res.json())
 			.then(data => callback(data))
 	},
-
+	GetOne: (id, callback) => {
+		fetch('/request', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+			body: JSON.stringify({
+				action: 'getOne',
+				id: id
+			})
+		})
+			.then(res => res.json())
+			.then(data => callback(data))
+		}
 }

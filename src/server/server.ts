@@ -34,13 +34,17 @@ const App: any = {
 				break
 		}
 
-		App.Express.post('/get', async (req: any, res: any) => {
+		App.Express.post('/request', async (req: any, res: any) => {
 			switch (req.body.action) {
 				case 'getMany':
 					Database.Actions.GetMany(req.body.count, req.body.collection, req.body.skip, (data: any) => res.send(data))
 					break
 				case 'getByQuery':
 					Database.Actions.GetByQuery(req.body.query, req.body.collection, (data: any) => res.send(data))
+					break
+				case 'delete':
+					Database.Actions.Delete(req.body.collection, req.body.id, (data: any) => res.send(data))
+					break
 			}
 
 		})
@@ -69,5 +73,5 @@ const App: any = {
 
 }
 
-Database.Connect().then(() => App.Init(process.argv.slice(2)[0]))
+Database.Connect(() => App.Init(process.argv.slice(2)[0]))
 

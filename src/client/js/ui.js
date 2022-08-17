@@ -1,4 +1,4 @@
-import { Toast, Modal } from 'bootstrap'
+import { Modal } from 'bootstrap'
 const defaultTab = 3
 const toastOptions = {
 	animation: true,
@@ -47,8 +47,9 @@ const Forms = {
 }
 
 const Tab = {
-	Active: $('.activeTabContainer').data('tab'),
+	Active: defaultTab,
 	Switch: (tab, callback = () => {}) => {
+		Tab.Active = tab
 		$('.activeTabBtn').removeClass('activeTabBtn')
 		$('.activeTabContainer').removeClass('activeTabContainer')
 		$(`.tabButton[data-tab-button=${tab}]`).addClass('activeTabBtn')
@@ -84,7 +85,6 @@ const Table = {
 						<td>sdfsdfsdf</td>
 						<td>sdfsdfdsf</td>
 						<td>sdfsdfdsf</td>
-
 					</tr>`)
 					break
 				case 2:
@@ -116,22 +116,17 @@ const Table = {
 	Insert: (tab, doc, id) => {
 		switch (parseInt(tab)) {
 			case 1:
-				$(`<tr>
-					<td>${Table.Index.Current[1]++}</td>
-					<td>${doc.name != null ? doc.name : '-'}</td>
-					<td>${doc.book != null ? doc.book : '-'}</td>
-					<td>${doc.author != null ? doc.author : '-'}</td>
-					<td>${doc.translator != null ? doc.translator : '-'}</td>
-					<td>${doc.code}</td>
-					<td>
-						<a target="blank" href="${doc.ebook != null ? doc.ebook : ''}">
-							<span class="material-icons-round">link</span>
-						</a>
-					</td>
-				</tr>`).insertBefore(`.tabContainer[data-tab=1] tbody tr:first-child`).on('ready', Table.Index.Update(1))
+				$(`<tr data-id=${id}>
+						<td>${Table.Index.Current[1]++}</td>
+						<td>${doc.member != null ? doc.member : '-'}</td>
+						<td>${doc.book != null ? doc.book : '-'}</td>
+						<td>sdfsdfsdf</td>
+						<td>sdfsdfdsf</td>
+						<td>sdfsdfdsf</td>
+					</tr>`).insertBefore(`.tabContainer[data-tab=1] tbody tr:first-child`).on('ready', Table.Index.Update(1))
 				break
 			case 2:
-				$(`<tr data-id="${id}">
+				$(`<tr data-id=${id}>
 						<td>${Table.Index.Current[2]++}</td>
 						<td>${doc.name}</td>
 						<td>${doc.surname}</td>
@@ -139,7 +134,7 @@ const Table = {
 					</tr>`).insertBefore(`.tabContainer[data-tab=2] tbody tr:first-child`).on('ready', Table.Index.Update(2))
 				break
 			case 3:
-				$(`<tr data-id="${id}">
+				$(`<tr data-id=${id}>
 						<td>${Table.Index.Current[3]++}</td>
 						<td>${doc.title != '' ? doc.title : '-'}</td>
 						<td>${doc.subtitle != '' ? doc.subtitle : '-'}</td>
@@ -155,7 +150,14 @@ const Table = {
 				break
 		}
 	},
-	Clear: () => $(`.activeTabContainer tbody`).empty()
+	Clear: () => $(`.activeTabContainer tbody`).empty(),
+	Delete: id => {
+		$(`.activeTabContainer tr[data-id=${id}]`).remove()
+	}
+}
+
+const Modals = {
+	Delete: null
 }
 
 export const UI = {
@@ -163,18 +165,51 @@ export const UI = {
 		Tab.Switch(defaultTab, Forms.Init)
 
 		$('.tabButton').on('click', e => Tab.Switch($(e.target).data('tabButton')))
-
-		$('.mainContent').on('contextmenu', () => { return false })
-
+		
 		$('.formContainer .addBtn').on('click', () => Forms.Update(1))
-
+		
 		$('.formContainer .clearBtn').on('click', e => Forms.Clear())
-
+		
 		$('.formContainer .btn-danger').on('click', e => Forms.Update(0))
-
+		
 		$('form').on('input', Forms.UpdateSubmitBtn)
+		
+		$('.tableContainer').on('contextmenu', 'table tbody tr', e => { 
+			
+			e.preventDefault()
+
+			var id = $(e.currentTarget).data('id')
+
+			if($('.activeTabContainer').data('tab') == 1)
+				$('.contextMenu .ctxEdit').addClass('disabled')
+			else 
+				$('.contextMenu .ctxEdit').removeClass('disabled')
+
+			$('.contextMenu')
+				.css({  top: e.pageY + "px", 
+						left: e.pageX + "px", 
+						opacity: '100%',
+						'pointer-events': 'all' })
+
+			$('#deleteModal .modal-footer button').attr('data-id', id)
+
+			$('.ctxEdit').attr('data-id', id)
+		})
+
+		$(document).on('click', e => { 
+			if (!e.target.closest('.contextMenu')) 
+				$('.contextMenu').css({ opacity: 0, 'pointer-events': 'none' })
+		})
+
+		$('.contextMenu li'), () => {
+			$('.contextMenu').css({ opacity: 0, 'pointer-events': 'none' })
+		}
+
+		Modals.Delete = new Modal($('#deleteModal'))
+
 	},
 	ActiveTab: Tab.Active,
 	Table: Table,
 	Forms: Forms,
+	Modal: Modals
 }

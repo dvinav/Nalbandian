@@ -6,10 +6,6 @@ head
 	title Գրադարան
 	script(src='/bundle.js') 
 body 
-	.toast-container.position-fixed.end-0.bottom-0
-		+Toast('primary', 'Գրանցվեց', 'bookSuccessToast')
-		+Toast('primary', 'Գրանցվեց', 'memberSuccessToast')
-		+Toast('primary', 'Գրանցվեց', 'borrowedSuccessToast')
 	include header.pug
 	main
 		.tabContainer(data-tab='1')
@@ -18,5 +14,7 @@ body
 			include tab_2.pug
 		.tabContainer(data-tab='3')
 			include tab_3.pug
+		+ContextMenu()
+	+Modal('Ջնջե՞լ Գրանցումը', 'danger', 'Ջնջել', 'deleteModal', false)
 	
 
