@@ -2,10 +2,10 @@ import  $ from 'jquery'
 import { UI } from './ui.js'
 import { Requests } from './requests.js'
 import '../sass/styles.sass'
-import { Toast, Modal } from 'bootstrap'
 
 let isSearching = false
 $(UI.Init)
+
 
 $(() => {
 	Requests.GetMany(15, 1, 1, data => UI.Table.InsertMany(1, data))
@@ -16,7 +16,7 @@ $(() => {
 $(document).on('submit', 'form', async e => {
 	e.preventDefault()
 	var fd = new FormData(e.target)
-	fd.append('collection', $('.activeTabContainer').data('tab'))
+	fd.append('collection', UI.ActiveTab)
 	Requests.Add(fd, id => {
 		$('#bookSuccessToast').show()
 		UI.Table.Insert($(e.target).parents('.tabContainer').data('tab'), Object.fromEntries(fd), id)
@@ -37,13 +37,26 @@ $(() => {
 		UI.Table.Clear()
 		if ($('.activeTabContainer .searchBox input').val()) {
 			isSearching = true
-			Requests.GetByQuery($(e.target).val(), $('.activeTabContainer').data('tab'), data => {
-				UI.Table.InsertMany($('.activeTabContainer').data('tab'), data)
+			Requests.GetByQuery($(e.target).val(), UI.ActiveTab, data => {
+				UI.Table.InsertMany(UI.ActiveTab, data)
 			})
 		} else {
 			isSearching = false
-			Requests.GetMany(15, $('.activeTabContainer').data('tab'), 1, data => UI.Table.InsertMany($('.activeTabContainer').data('tab'), data))
+			Requests.GetMany(15, UI.ActiveTab, 1, data => UI.Table.InsertMany(UI.ActiveTab, data))
 		}
-		UI.Table.Index.Update($('.activeTabContainer').data('tab'))
+		UI.Table.Index.Update(UI.ActiveTab)
+	})
+
+
+	$('.contextMenu .ctxDelete').on('click', e => UI.Modal.Delete.show())
+	
+	$('.contextMenu .ctxDelete').on('click', e => UI.Modal.Delete.show())
+
+	$('#deleteModal .modal-footer button').on('click', e => {
+		Requests.Delete(UI.ActiveTab, $(e.target).attr('data-id'), id => {
+			UI.Modal.Delete.hide()
+			UI.Table.Delete(id)
+			UI.Table.Index.Update(UI.ActiveTab)
+		})
 	})
 })
