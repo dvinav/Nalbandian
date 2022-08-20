@@ -1,5 +1,6 @@
-export const Requests = {
-	Delete: (col, id, callback) => {
+export namespace Requests {
+
+	export const Delete = (col: number, id: String, callback: Function) => {
 		fetch('/request', {
 			method: 'POST',
 			headers: {
@@ -12,8 +13,9 @@ export const Requests = {
 			})
 		})
 			.then(() => callback(id))
-	},
-	GetMany: (count, col, skip, callback = () => {}) => {
+	}
+
+	export const GetMany = (count: number, col: number, skip: number, callback: Function) => {
 		fetch('/request', {
 			method: 'POST',
 			headers: {
@@ -28,16 +30,18 @@ export const Requests = {
 		})
 			.then(res => res.json())
 			.then(data => callback(data))
-	},
-	Add: async (fd, callback) => {
+	}
+
+	export const Add = async (fd: FormData, callback: Function) => {
 		fetch('/upload', {
 			method: 'POST',
 			body: fd
 		})
 			.then(res => res.text())
 			.then(data => callback(data))
-	},
-	GetByQuery: (query, col, callback = () => { }) => {
+	}
+
+	export const GetByQuery = (query: String, col: number, callback: Function) => {
 		fetch('/request', {
 			method: 'POST',
 			headers: {
@@ -51,8 +55,9 @@ export const Requests = {
 		})
 			.then(res => res.json())
 			.then(data => callback(data))
-	},
-	GetOne: (id, callback) => {
+	}
+
+	export const GetOne = (id: String, callback: Function) => {
 		fetch('/request', {
 			method: 'POST',
 			headers: {
@@ -65,5 +70,5 @@ export const Requests = {
 		})
 			.then(res => res.json())
 			.then(data => callback(data))
-		}
+	}
 }

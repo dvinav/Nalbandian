@@ -20,9 +20,6 @@ const App: any = {
 		App.Express.use(express.static(process.cwd() + '/public'))
 
 		switch (args) {
-			case 'dev':
-				App.StartDev()
-				break
 			case 'init':
 				Database.Init()
 				break
@@ -56,11 +53,11 @@ const App: any = {
 	},
 	Start: () => {
 		App.Express.get('/', (req: any, res: any) => {
-			res.sendFile(__dirname + '/public/index.html')
+			res.sendFile(__dirname + '../../public/index.html')
 		})
 
 		App.Express.listen(App.Port, () => console.log('\x1b[37m', `- App listening on port ${App.Port}`))
-	},
+	}/*,
 	StartDev: () => {
 		App.Express.get('/', (req: any, res: any) => {
 			console.log('\x1b[36m', '- App started in dev mode')
@@ -69,7 +66,7 @@ const App: any = {
 		})
 
 		App.Express.listen(App.Port, () => console.log('\x1b[37m', `- App listening on port ${App.Port}`))
-	}
+	}*/
 
 }
 
