@@ -12,14 +12,6 @@ namespace DOM
 		document.title = Strings.DocumentTitle
 
 		DOM.Root.render(<Components.Header />)
-
-		/* DOM.Root.render(
-			<main>
-				<Components.TabContainer tab="1">
-
-				</Components.TabContainer>
-			</main>
-		) */
 	}
 }
 

@@ -2,22 +2,27 @@ import express, { Express, Request, Response } from 'express'
 import { Database } from './dbConnection'
 import multer from 'multer'
 
-const Multer = {
-	Storage: multer.diskStorage({
-		destination: 'uploads/',
-		filename: (req, file, callback) => {
-			return callback(null, `${Date.now()}.${file.originalname.split('.').pop()}`)
-		}
-	})
-}
+namespace App {
+	
+	const Port = 2022
 
-const App: any = {
-	Port: 2022,
-	Express: express(),
-	Upload: multer({ storage: Multer.Storage }),
-	Init: (args: string) => {
-		App.Express.use(express.json())
-		App.Express.use(express.static(process.cwd() + '/public'))
+	const Express = express()
+
+	namespace Multer {
+
+		const Storage = multer.diskStorage({
+			destination: 'uploads/',
+			filename: (req, file, callback) => {
+				return callback(null, `${Date.now()}.${file.originalname.split('.').pop()}`)
+			}
+		})
+
+		export const Upload = multer({ storage: Storage })
+	}
+
+	export const Init = (args: string) => {
+		Express.use(express.json())
+		Express.use(express.static(process.cwd() + '/public'))
 
 		switch (args) {
 			case 'init':
@@ -27,11 +32,11 @@ const App: any = {
 				Database.CreateIndexes()
 				break
 			default:
-				App.Start()
+				Start()
 				break
 		}
 
-		App.Express.post('/request', async (req: any, res: any) => {
+		Express.post('/request', async (req: any, res: any) => {
 			switch (req.body.action) {
 				case 'getMany':
 					Database.Actions.GetMany(req.body.count, req.body.collection, req.body.skip, (data: any) => res.send(data))
@@ -46,29 +51,20 @@ const App: any = {
 
 		})
 
-		App.Express.post('/upload', App.Upload.single('picture'), async (req: any, res: any) => {
+		Express.post('/upload', Multer.Upload.single('picture'), async (req: any, res: any) => {
 			if (req?.file?.filename) req.body.picture = req?.file?.filename
 			Database.Actions.Insert(req.body, (data: any) => res.send(data))
 		})
-	},
-	Start: () => {
-		App.Express.get('/', (req: any, res: any) => {
+	}
+
+	const Start = () => {
+		Express.get('/', (req: any, res: any) => {
 			res.sendFile(__dirname + '../../public/index.html')
 		})
 
-		App.Express.listen(App.Port, () => console.log('\x1b[37m', `- App listening on port ${App.Port}`))
-	}/*,
-	StartDev: () => {
-		App.Express.get('/', (req: any, res: any) => {
-			console.log('\x1b[36m', '- App started in dev mode')
-			App.Express.set('view engine', 'pug')
-			res.render(process.cwd() + '/src/client/views/index.pug')
-		})
-
-		App.Express.listen(App.Port, () => console.log('\x1b[37m', `- App listening on port ${App.Port}`))
-	}*/
+		Express.listen(Port, () => console.log('\x1b[37m', `- App listening on port ${Port}`))
+	}
 
 }
 
 Database.Connect(() => App.Init(process.argv.slice(2)[0]))
-

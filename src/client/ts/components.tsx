@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import Strings from '../json/strings.json'
 import Icons from '../json/icons.json'
 import { UI } from './ui'
-import { render } from 'sass'
-/*import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'*/
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
 
 export namespace Components
 {
@@ -17,7 +16,6 @@ export namespace Components
 	}
 
 	export class Header extends React.Component {
-		// useEffect(() => UI.Tabs.Switch(UI.Tabs.Active))
 
 		componentDidMount() { UI.Tabs.Switch(UI.Tabs.Active) }
 		

@@ -2,13 +2,11 @@ import { DOM } from './dom'
 import { Modal } from 'bootstrap'
 import '../sass/styles.sass'
 
-const defaultTab = 3
-
 export namespace UI 
 {
 
 	export namespace Tabs {
-		const Default = 1
+		const Default = 3
 
 		export let Active: number = Default
 
