@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
 		{
-			"label": "Webpack Watch",
+			"label": "Webpack Dev",
 			"type": "shell",
 			"command": "npx webpack --config ./config/client/webpack.config.ts --watch",
 			"problemMatcher": []

@@ -1,16 +1,41 @@
-const path = require('path')
-const TerserPlugin = require("terser-webpack-plugin")
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import path from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
+
+const devTemplate = `
+<html lang="hy">
+	<body>
+		<div id="root"></div>
+	</body>
+</html>`
+
+const productionTemplate = `
+<html lang="hy">
+	<head>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div id="root"></div>
+	</body>
+</html>`
+
 module.exports = {
 	mode: "development",
-	entry: path.resolve(__dirname, '../../src/client/ts/index.ts'),
+	entry: path.resolve(__dirname, '../../src/client/index.tsx'),
 	devtool: "source-map",
-	/* optimization: {
-		minimizer: [new TerserPlugin({
-			extractComments: false,
-		})],
+	optimization: process.env.NODE_ENV !== "production"
+		? { minimize: false }
+		: {
+		minimizer: [
+			new TerserPlugin({
+				extractComments: false,
+			}),
+			new CssMinimizerPlugin(),
+		],
 		minimize: true
-	}, */
+	}, 
 	module: {
 		rules: [
 			{
@@ -26,9 +51,11 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.s[ac]ss$/i,
+				test: /\.(sa|sc|c)ss$/,
 				use: [
-					"style-loader",
+					process.env.NODE_ENV !== "production"
+						? "style-loader"
+						: MiniCssExtractPlugin.loader,
 					{
 						loader: "css-loader",
 						options: {
@@ -47,26 +74,16 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new HtmlWebpackPlugin(
-				{
-					template: path.resolve(__dirname, '../../src/client/index.htm') 
-					/* minify: {
-						removeComments: true,
-						collapseWhitespace: true,
-						removeRedundantAttributes: true,
-						useShortDoctype: true,
-						removeEmptyAttributes: true,
-						removeStyleLinkTypeAttributes: true,
-						keepClosingSlash: true,
-						minifyJS: true,
-						minifyCSS: true,
-						minifyURLs: true,
-					}, */
-				}
-			)
+		new HtmlWebpackPlugin({ 
+			templateContent: process.env.NODE_ENV !== "production" ? devTemplate : productionTemplate,
+			minify: process.env.NODE_ENV !== "production" ? false : true,
+		}),
+		new MiniCssExtractPlugin({
+			filename: "styles.css",
+		})
 	],
 	resolve: {
-		extensions: ['*', '.tsx', '.ts']
+		extensions: ['*', '.tsx', '.ts', '.js', '.jsx']
 	},
 	output: {
 		path: path.resolve(__dirname, '../../public/'),

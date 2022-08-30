@@ -1,0 +1,7 @@
+.tabContainer {
+    width: 100vw;
+    display: flex;
+    height: calc(100vh - var(--header-height));
+    position: fixed;
+    transition: all 200ms ease-out;
+}

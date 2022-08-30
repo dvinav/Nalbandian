@@ -1,4 +1,4 @@
-export namespace Requests {
+namespace Requests {
 
 	export const Delete = (col: number, id: String, callback: Function) => {
 		fetch('/request', {
@@ -72,3 +72,5 @@ export namespace Requests {
 			.then(data => callback(data))
 	}
 }
+
+export default Requests

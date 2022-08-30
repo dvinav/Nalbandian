@@ -1,0 +1,21 @@
+$primary: #3F51B5;
+
+@import 'bootstrap';
+
+:root {
+	--header-height: 70px;
+	--bs-primary: #3F51B5;
+	--bs-link-color: var(--primary)
+}
+
+body,
+html {
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.row {
+	margin-top: initial;
+	margin-right: initial;
+	margin-left: initial;
+}

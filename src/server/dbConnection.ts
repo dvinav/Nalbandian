@@ -49,7 +49,7 @@ export namespace Database {
 			await Mongo.Client.connect()
 			await Mongo.DB.command({ ping: 1 })
 			next()
-			console.log('\x1b[37m', '- Connected successfully to MongoMongo.DB server')
+			console.log('\x1b[37m', '- Connected successfully to Mongodb server')
 		} catch (err) {
 			console.error(err)
 		}

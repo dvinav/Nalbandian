@@ -10,8 +10,10 @@
 		"resolveJsonModule": true,
 		"rootDir": "../../src/client/",
 		"jsx": "react",
+		"allowJs": true,
+		"suppressImplicitAnyIndexErrors": true
 	},
 	"include": [
-		"../../src/client/ts/**/*"
+		"../../src/client/**/*"
 	],
 }
