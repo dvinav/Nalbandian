@@ -30,5 +30,11 @@
 	"Translator": "Թարգմանիչ",
 	"ISBN": "ISBN",
 	"BookCode": "Կոդ",
-	"Ebook": "Էլ-Գրքի Հասցե"
+	"Ebook": "Էլ-Գրքի Հասցե",
+	"Date": "Թվական",
+	"Deadline": "Ժամկետ",
+	"Return": "Վերադարձում",
+	"Armenian": "Հայերեն",
+	"Persian":"Պարսկերեն",
+	"English": "Անգլերեն"
 }

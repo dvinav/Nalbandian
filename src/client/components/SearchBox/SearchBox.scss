@@ -1,16 +1,16 @@
 .searchBox {
-    .input-group-text {
-        background: #fff;
-        border-right: none;
-        border-left: none;
-    }
-    input {
-        border-left: none;
-        & > :focus {
-            border-color: #ced4da;
-        }
-    }
-    & > * {
-        border-radius: 0;
-    }
+	.input-group-text {
+		background: #fff;
+		border-right: none;
+		border-left: none;
+	}
+	input {
+		border-left: none;
+		& > :focus {
+			border-color: #ced4da;
+		}
+	}
+	& > * {
+		border-radius: 0;
+	}
 }

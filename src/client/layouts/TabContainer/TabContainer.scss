@@ -1,7 +1,24 @@
 .tabContainer {
-    width: 100vw;
-    display: flex;
-    height: calc(100vh - var(--header-height));
-    position: fixed;
-    transition: all 200ms ease-out;
+	width: 100vw;
+	display: flex;
+	height: calc(100vh - var(--header-height));
+	position: fixed;
+	transition: all 200ms ease-out;
+}
+
+.tabFade-enter {
+	opacity: 0;
+}
+
+.tabFade-enter.tabFade-enter-active {
+	opacity: 1;
+	transition: opacity 200ms ease 150ms;
+}
+
+.tabFade-exit {
+	opacity: 1;
+}
+.tabFade-exit.tabFade-exit-active {
+	opacity: 0;
+	transition: opacity 200ms;
 }

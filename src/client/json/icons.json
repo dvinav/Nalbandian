@@ -28,5 +28,6 @@
 	"Translator": "translate",
 	"ISBN": "fingerprint",
 	"BookCode": "123",
-	"Ebook": "link"
+	"Ebook": "link",
+	"Language": "language"
 }
