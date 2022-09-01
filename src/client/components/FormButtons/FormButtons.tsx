@@ -1,43 +1,48 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { Button } from 'react-bootstrap'
 import Icon from '../Icon/Icon'
 import Strings from '../../json/strings.json'
 import Icons from '../../json/icons.json'
 
-const AddButton = (props: any) => {
-    return (
-        <Button variant="primary" className="addBtn" onClick={props.onClick}>
-            <Icon>{Icons.Add}</Icon>
-            {Strings.Add}
-        </Button>
-    )
+type Props = {
+	onClick: MouseEventHandler<HTMLButtonElement>
+	disabled: boolean
 }
 
-const ClearButton = () => {
-    return (
-        <Button variant="primary" className="clearBtn">
-            <Icon>{Icons.Clear}</Icon>
-            {Strings.Clear}
-        </Button>
-    )
+const AddButton = (props: Props) => {
+	return (
+		<Button variant="primary" className="addBtn" onClick={props.onClick} disabled={props.disabled}>
+			<Icon>{Icons.Add}</Icon>
+			{Strings.Add}
+		</Button>
+	)
 }
 
-const SubmitButton = () => {
-    return (
-        <Button variant="success" type="submit">
-            <Icon>{Icons.Submit}</Icon>
-            {Strings.Submit}
-        </Button>
-    )
+const ClearButton = (props: Props) => {
+	return (
+		<Button variant="primary" className="clearBtn" onClick={props.onClick} disabled={props.disabled}>
+			<Icon>{Icons.Clear}</Icon>
+			{Strings.Clear}
+		</Button>
+	)
 }
 
-const CancelButton = (props: any) => {
-    return (
-        <Button variant="danger" onClick={props.onClick}>
-            <Icon>{Icons.Clear}</Icon>
-            {Strings.Clear}
-        </Button>
-    )
+const SubmitButton = (props: Props) => {
+	return (
+		<Button variant="success" type="submit" onClick={props.onClick} disabled={props.disabled}>
+			<Icon>{Icons.Submit}</Icon>
+			{Strings.Submit}
+		</Button>
+	)
+}
+
+const CancelButton = (props: Props) => {
+	return (
+		<Button variant="danger" onClick={props.onClick} disabled={props.disabled}>
+			<Icon>{Icons.Cancel}</Icon>
+			{Strings.Cancel}
+		</Button>
+	)
 }
 
 export { AddButton, ClearButton, CancelButton, SubmitButton }

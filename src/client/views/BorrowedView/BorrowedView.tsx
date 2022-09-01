@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Row, Table } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import FormContainer from '../../layouts/FormContainer/FormContainer'
 import TabContainer from '../../layouts/TabContainer/TabContainer'
 import TextField from '../../components/TextField/TextField'
@@ -10,13 +10,9 @@ class Borrowed extends React.Component {
 	render() {
 		return (
 			<TabContainer>
-				<FormContainer /* onSubmit={UI.Submit} */>
-					<Row className="g-2">
-						<TextField name="member"></TextField>
-					</Row>
-					<Row className="g-2">
-						<TextField name="book"></TextField>
-					</Row>
+				<FormContainer onSubmit={() => {}}>
+					<TextField name="member"></TextField>
+					<TextField name="book"></TextField>
 				</FormContainer>
 				<TableContainer>
 					<Table striped bordered hover>
@@ -26,12 +22,8 @@ class Borrowed extends React.Component {
 								<th style={{ width: '25%' }}>{Strings.Name}</th>
 								<th style={{ width: '26%' }}>{Strings.Book}</th>
 								<th style={{ width: '15%' }}>{Strings.Date}</th>
-								<th style={{ width: '15%' }}>
-									{Strings.Deadline}
-								</th>
-								<th style={{ width: '15%' }}>
-									{Strings.Return}
-								</th>
+								<th style={{ width: '15%' }}>{Strings.Deadline}</th>
+								<th style={{ width: '15%' }}>{Strings.Return}</th>
 							</tr>
 						</thead>
 						<tbody></tbody>

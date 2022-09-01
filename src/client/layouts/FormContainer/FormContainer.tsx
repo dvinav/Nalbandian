@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import './FormContainer.scss'
 import { Container, Row, Col } from 'react-bootstrap'
-import {
-	AddButton,
-	ClearButton,
-	CancelButton,
-	SubmitButton,
-} from '../../components/FormButtons/FormButtons'
+import { AddButton, ClearButton, CancelButton, SubmitButton } from '../../components/FormButtons/FormButtons'
 
-const FormContainer = (props: any) => {
+type Props = {
+	onSubmit: React.FormEventHandler<HTMLFormElement>
+	children: React.ReactNode
+}
+
+const FormContainer = (props: Props) => {
 	const [formState, switchFormState] = useState(0)
 
 	return (
@@ -17,21 +17,19 @@ const FormContainer = (props: any) => {
 				<Container className="p-2">
 					<Row className="g-2">
 						<Col>
-							<AddButton onClick={() => switchFormState(1)} />
+							<AddButton onClick={() => switchFormState(1)} disabled={Boolean(formState)} />
 						</Col>
 						<Col>
-							<ClearButton />
+							<ClearButton onClick={() => {}} disabled={!Boolean(formState)} />
 						</Col>
 					</Row>
-					<fieldset disabled={!Boolean(formState)}>
-						{props.children}
-					</fieldset>
+					<fieldset disabled={!Boolean(formState)}>{props.children}</fieldset>
 					<Row className="g-2">
 						<Col>
-							<CancelButton onClick={() => switchFormState(0)} />
+							<CancelButton onClick={() => switchFormState(0)} disabled={!Boolean(formState)} />
 						</Col>
 						<Col>
-							<SubmitButton />
+							<SubmitButton onClick={() => {}} disabled={!Boolean(formState)} />
 						</Col>
 					</Row>
 				</Container>
