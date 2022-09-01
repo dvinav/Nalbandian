@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from 'express'
-import { Database } from './dbConnection'
+import * as Database from './dbConnection'
 import multer from 'multer'
 import path from 'path'
-	
+
 const port = 2022
 
 const app = express()
@@ -10,11 +10,11 @@ const app = express()
 const routes = ['/', '/borrowed', '/books', '/members']
 
 const multerStorage = multer.diskStorage({
-		destination: 'uploads/',
-		filename: (req, file, callback) => {
-			return callback(null, `${Date.now()}.${file.originalname.split('.').pop()}`)
-		}
-	})
+	destination: 'uploads/',
+	filename: (req, file, callback) => {
+		return callback(null, `${Date.now()}.${file.originalname.split('.').pop()}`)
+	},
+})
 
 const upload = multer({ storage: multerStorage })
 
@@ -46,7 +46,6 @@ const init = (args: string) => {
 				Database.Actions.Delete(req.body.collection, req.body.id, (data: any) => res.send(data))
 				break
 		}
-
 	})
 
 	app.post('/upload', upload.single('picture'), async (req: any, res: any) => {
@@ -56,7 +55,7 @@ const init = (args: string) => {
 }
 
 const start = () => {
-	app.get('*', (req: any, res: any) => {
+	app.get(routes, (req: any, res: any) => {
 		res.sendFile(path.resolve(__dirname + '/../../public/index.html'))
 	})
 

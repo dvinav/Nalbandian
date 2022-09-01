@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Strings from '../../json/strings.json'
 import TabSwitchBtn from '../../components/TabSwitchBtn/TabSwitchBtn'
 import './Header.scss'

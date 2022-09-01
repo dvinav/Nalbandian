@@ -3,7 +3,6 @@
 	display: flex;
 	height: calc(100vh - var(--header-height));
 	position: fixed;
-	transition: all 200ms ease-out;
 }
 
 .tabFade-enter {
@@ -12,7 +11,7 @@
 
 .tabFade-enter.tabFade-enter-active {
 	opacity: 1;
-	transition: opacity 200ms ease 150ms;
+	transition: opacity 300ms ease 200ms;
 }
 
 .tabFade-exit {
@@ -20,5 +19,5 @@
 }
 .tabFade-exit.tabFade-exit-active {
 	opacity: 0;
-	transition: opacity 200ms;
+	transition: opacity 300ms;
 }

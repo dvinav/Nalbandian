@@ -5,7 +5,7 @@ import Strings from '../../json/strings.json'
 import Icons from '../../json/icons.json'
 
 type Props = {
-	onClick: MouseEventHandler<HTMLButtonElement>
+	onClick?: MouseEventHandler<HTMLButtonElement>
 	disabled: boolean
 }
 

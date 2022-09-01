@@ -14,30 +14,40 @@ import Select from '../../components/Select/Select'
 type State = {
 	rows: any[]
 	isSearching: boolean
+	currentRowId: string
 }
 
 type Props = {}
 
-var rowNum = 1
+var rowIndex = 1
 
 class BooksView extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props)
+		document.title = Strings.DocumentTitle + ': ' + Strings.Header.Books
 		this.state = {
 			rows: [],
 			isSearching: false,
+			currentRowId: '',
 		}
 		Requests.GetMany(20, 3, 1).then((data) => {
 			this.setState({ rows: data })
 		})
 
-		rowNum = 1
+		rowIndex = 1
 	}
 
 	render() {
 		return (
 			<TabContainer>
-				<FormContainer onSubmit={() => {}}>
+				<FormContainer
+					col={3}
+					onResult={(row: object, id: string) => {
+						rowIndex = 1
+						this.state.rows.unshift(row)
+						this.setState({ currentRowId: id })
+					}}
+				>
 					<TextField name="title" />
 					<TextField name="subtitle" />
 					<TextField name="author" />
@@ -71,7 +81,12 @@ class BooksView extends React.Component<Props, State> {
 						</thead>
 						<tbody>
 							{this.state.rows.map((row, key) => (
-								<TableRow doc={row} key={key} row={rowNum++} />
+								<TableRow
+									doc={row}
+									key={key}
+									row={rowIndex++}
+									id={this.state.currentRowId != '' ? this.state.currentRowId : row._id}
+								/>
 							))}
 						</tbody>
 					</Table>
