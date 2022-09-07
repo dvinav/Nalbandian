@@ -12,11 +12,7 @@ export const Delete = (col: number, id: String, callback: Function) => {
 	}).then(() => callback(id))
 }
 
-export const GetMany = async (
-	count: number,
-	col: number,
-	skip: number
-): Promise<any[]> => {
+export const GetMany = async (count: number, col: number, skip: number): Promise<any[]> => {
 	const res = await fetch('/request', {
 		method: 'POST',
 		headers: {

@@ -29,5 +29,6 @@
 	"ISBN": "fingerprint",
 	"BookCode": "123",
 	"Ebook": "link",
-	"Language": "language"
+	"Language": "language",
+	"SuccessToast": "check"
 }

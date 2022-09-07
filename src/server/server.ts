@@ -21,6 +21,7 @@ const upload = multer({ storage: multerStorage })
 const init = (args: string) => {
 	app.use(express.json())
 	app.use(express.static(process.cwd() + '/public'))
+	app.use(express.static(process.cwd() + '/assets'))
 
 	switch (args) {
 		case 'init':

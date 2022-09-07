@@ -1,4 +1,4 @@
-const TN = (n: number) => {
+const TN = (n: number): string => {
 	switch (n) {
 		case 1:
 			return 'borrowed'
@@ -15,7 +15,7 @@ const TN = (n: number) => {
 	}
 }
 
-const TS = (s: string) => {
+const TS = (s: string): number => {
 	switch (s) {
 		case 'borrowed':
 			return 1

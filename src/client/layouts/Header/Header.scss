@@ -1,6 +1,7 @@
 header {
 	display: flex;
 	height: var(--header-height);
+	overscroll-behavior: none;
 	width: 100%;
 	border-bottom: 1px solid var(--bs-gray-400);
 	user-select: none;

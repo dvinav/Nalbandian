@@ -1,53 +1,18 @@
 import * as React from 'react'
-import { Table } from 'react-bootstrap'
-import FormContainer from '../../layouts/FormContainer/FormContainer'
-import TabContainer from '../../layouts/TabContainer/TabContainer'
 import TextField from '../../components/TextField/TextField'
-import TableContainer from '../../layouts/TableContainer/TableContainer'
 import Strings from '../../json/strings.json'
 import Icons from '../../json/icons.json'
 import Icon from '../../components/Icon/Icon'
-import * as Requests from '../../api/requests'
-import { BookTableRow as TableRow } from '../../components/TableRows/TableRows'
 import Select from '../../components/Select/Select'
+import TH from '../../components/TH/TH'
+import ViewLayout from '../../layouts/ViewLayout/ViewLayout'
 
-type State = {
-	rows: any[]
-	isSearching: boolean
-	currentRowId: string
-}
-
-type Props = {}
-
-var rowIndex = 1
-
-class BooksView extends React.Component<Props, State> {
-	constructor(props: Props) {
-		super(props)
-		document.title = Strings.DocumentTitle + ': ' + Strings.Header.Books
-		this.state = {
-			rows: [],
-			isSearching: false,
-			currentRowId: '',
-		}
-		Requests.GetMany(20, 3, 1).then((data) => {
-			this.setState({ rows: data })
-		})
-
-		rowIndex = 1
-	}
-
-	render() {
-		return (
-			<TabContainer>
-				<FormContainer
-					col={3}
-					onResult={(row: object, id: string) => {
-						rowIndex = 1
-						this.state.rows.unshift(row)
-						this.setState({ currentRowId: id })
-					}}
-				>
+const BooksView = () => {
+	return (
+		<ViewLayout
+			name="books"
+			formInputs={
+				<>
 					<TextField name="title" />
 					<TextField name="subtitle" />
 					<TextField name="author" />
@@ -63,37 +28,23 @@ class BooksView extends React.Component<Props, State> {
 					</Select>
 					<TextField name="bookCode" />
 					<TextField name="ebook" />
-				</FormContainer>
-				<TableContainer>
-					<Table striped bordered hover>
-						<thead>
-							<tr>
-								<th style={{ width: '4%' }}>#</th>
-								<th style={{ width: '22%' }}>{Strings.Title}</th>
-								<th style={{ width: '22%' }}>{Strings.Subtitle}</th>
-								<th style={{ width: '20%' }}>{Strings.Author}</th>
-								<th style={{ width: '17%' }}>{Strings.Translator}</th>
-								<th style={{ width: '8%' }}>{Strings.BookCode}</th>
-								<th style={{ width: '4%' }}>
-									<Icon>{Icons.EbookTH}</Icon>
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							{this.state.rows.map((row, key) => (
-								<TableRow
-									doc={row}
-									key={key}
-									row={rowIndex++}
-									id={this.state.currentRowId != '' ? this.state.currentRowId : row._id}
-								/>
-							))}
-						</tbody>
-					</Table>
-				</TableContainer>
-			</TabContainer>
-		)
-	}
+				</>
+			}
+			tableHead={
+				<>
+					<TH width="4%">#</TH>
+					<TH width="22%">{Strings.Title}</TH>
+					<TH width="22%">{Strings.Subtitle}</TH>
+					<TH width="20%">{Strings.Author}</TH>
+					<TH width="17%">{Strings.Translator}</TH>
+					<TH width="8%">{Strings.BookCode}</TH>
+					<TH width="4%">
+						<Icon>{Icons.EbookTH}</Icon>
+					</TH>
+				</>
+			}
+		/>
+	)
 }
 
 export default BooksView

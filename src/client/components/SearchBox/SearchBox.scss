@@ -1,4 +1,7 @@
-.searchBox {
+.searchBox.input-group {
+	position: sticky;
+	top: 0;
+	z-index: 3;
 	.input-group-text {
 		background: #fff;
 		border-right: none;
@@ -6,11 +9,12 @@
 	}
 	input {
 		border-left: none;
-		& > :focus {
-			border-color: #ced4da;
-		}
+	}
+	input.form-control:focus {
+		border-color: #ced4da !important;
 	}
 	& > * {
-		border-radius: 0;
+		border-radius: 0 !important;
+		border-top: none !important;
 	}
 }

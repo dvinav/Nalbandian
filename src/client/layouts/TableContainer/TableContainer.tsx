@@ -1,14 +1,15 @@
-import React from 'react'
-import SearchBox from '../../components/SearchBox/SearchBox'
+import React, { useEffect, useState } from 'react'
 import './TableContainer.scss'
 
-const TableContainer = (props: { children: React.ReactNode }) => {
-	return (
-		<div className="tableContainer">
-			<SearchBox />
-			{props.children}
-		</div>
-	)
+type Props = {
+	children: React.ReactNode
+	onScroll: Function
 }
+
+const TableContainer = React.forwardRef<HTMLDivElement, Props>((props: Props, ref) => (
+	<div className="tableContainer" onScroll={() => props.onScroll()} ref={ref}>
+		{props.children}
+	</div>
+))
 
 export default TableContainer

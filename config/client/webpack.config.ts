@@ -15,6 +15,7 @@ const productionTemplate = `
 <html lang="hy">
 	<head>
 		<link rel="stylesheet" href="styles.css" />
+		<link rel="icon" href="/assets/favicon.ico" />
 	</head>
 	<body>
 		<div id="root"></div>
@@ -22,20 +23,21 @@ const productionTemplate = `
 </html>`
 
 module.exports = {
-	mode: "development",
+	mode: 'development',
 	entry: path.resolve(__dirname, '../../src/client/index.tsx'),
-	devtool: "source-map",
-	optimization: process.env.NODE_ENV !== "production"
-		? { minimize: false }
-		: {
-		minimizer: [
-			new TerserPlugin({
-				extractComments: false,
-			}),
-			new CssMinimizerPlugin(),
-		],
-		minimize: true
-	}, 
+	devtool: 'source-map',
+	optimization:
+		process.env.NODE_ENV !== 'production'
+			? { minimize: false }
+			: {
+					minimizer: [
+						new TerserPlugin({
+							extractComments: false,
+						}),
+						new CssMinimizerPlugin(),
+					],
+					minimize: true,
+			  },
 	module: {
 		rules: [
 			{
@@ -43,50 +45,48 @@ module.exports = {
 				exclude: /node_modules/,
 				use: ['babel-loader'],
 			},
-			{ 
-				test: /\.(ts|tsx)$/, 
+			{
+				test: /\.(ts|tsx)$/,
 				loader: 'ts-loader',
 				options: {
-					configFile: path.resolve(__dirname, './tsconfig.json')
-				}
+					configFile: path.resolve(__dirname, './tsconfig.json'),
+				},
 			},
 			{
 				test: /\.(sa|sc|c)ss$/,
 				use: [
-					process.env.NODE_ENV !== "production"
-						? "style-loader"
-						: MiniCssExtractPlugin.loader,
+					process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
 					{
-						loader: "css-loader",
+						loader: 'css-loader',
 						options: {
 							sourceMap: true,
 						},
 					},
 					{
-						loader: "sass-loader",
+						loader: 'sass-loader',
 						options: {
 							sourceMap: true,
-							implementation: require("sass")
+							implementation: require('sass'),
 						},
-					}
-				]
-			}
-		]
+					},
+				],
+			},
+		],
 	},
 	plugins: [
-		new HtmlWebpackPlugin({ 
-			templateContent: process.env.NODE_ENV !== "production" ? devTemplate : productionTemplate,
-			minify: process.env.NODE_ENV !== "production" ? false : true,
+		new HtmlWebpackPlugin({
+			templateContent: process.env.NODE_ENV !== 'production' ? devTemplate : productionTemplate,
+			minify: process.env.NODE_ENV !== 'production' ? false : true,
 		}),
 		new MiniCssExtractPlugin({
-			filename: "styles.css",
-		})
+			filename: 'styles.css',
+		}),
 	],
 	resolve: {
-		extensions: ['*', '.tsx', '.ts', '.js', '.jsx']
+		extensions: ['*', '.tsx', '.ts', '.js', '.jsx'],
 	},
 	output: {
 		path: path.resolve(__dirname, '../../public/'),
-		filename: 'bundle.js'
-	}
-};
+		filename: 'bundle.js',
+	},
+}
