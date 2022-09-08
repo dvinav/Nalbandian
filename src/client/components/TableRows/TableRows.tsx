@@ -2,11 +2,19 @@ import React from 'react'
 import Icon from '../Icon/Icon'
 import Icons from '../../json/icons.json'
 
-const TableRow: React.FC<{ doc: any; row: number; id: string; type: number }> = ({ doc, row, id, type }) => {
+type Props = {
+	doc: any
+	row: number
+	id: string
+	type: number
+	onContextMenu: React.MouseEventHandler
+}
+
+const TableRow: React.FC<Props> = ({ doc, row, id, type, onContextMenu }) => {
 	switch (type) {
 		case 1:
 			return (
-				<tr data-id={id}>
+				<tr data-id={id} onContextMenu={onContextMenu}>
 					<td>{row}</td>
 					<td>{doc.member != null ? doc.member : '-'}</td>
 					<td>{doc.book != null ? doc.book : '-'}</td>
@@ -18,7 +26,7 @@ const TableRow: React.FC<{ doc: any; row: number; id: string; type: number }> = 
 			break
 		case 2:
 			return (
-				<tr data-id={id}>
+				<tr data-id={id} onContextMenu={onContextMenu}>
 					<td>{row}</td>
 					<td>{doc.name}</td>
 					<td>{doc.surname}</td>
@@ -28,7 +36,7 @@ const TableRow: React.FC<{ doc: any; row: number; id: string; type: number }> = 
 			break
 		case 3:
 			return (
-				<tr data-id={id}>
+				<tr data-id={id} onContextMenu={onContextMenu}>
 					<td>{row}</td>
 					<td>{doc.title != '' ? doc.title : '-'}</td>
 					<td>{doc.subtitle != '' ? doc.subtitle : '-'}</td>

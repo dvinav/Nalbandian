@@ -37,5 +37,7 @@
 	"Armenian": "Հայերեն",
 	"Persian":"Պարսկերեն",
 	"English": "Անգլերեն",
-	"SuccessToast": "Գրանցվեց"
+	"SuccessToast": "Գրանցվեց",
+	"Edit": "Խմբագրել",
+	"Delete": "Ջնջել"
 }

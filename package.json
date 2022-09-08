@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "dist/server.js",
 	"scripts": {
-		"build": "tsc --project config/server/tsconfig.json && NODE_ENV=production webpack --config ./config/client/webpack.config.ts",
+		"build_linux": "tsc --project config/server/tsconfig.json && NODE_ENV=production webpack --config ./config/client/webpack.config.ts",
+		"build_windows": "tsc --project config/server/tsconfig.json && @powershell -NoProfile -ExecutionPolicy Unrestricted -Command $env:NODE_ENV='production'; webpack --config ./config/client/webpack.config.ts",
 		"dev": "ts-node-dev --project config/server/tsconfig.json src/server/server.ts",
 		"start": "node dist/server.js"
 	},

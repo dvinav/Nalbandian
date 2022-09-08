@@ -1,4 +1,4 @@
-import React, { FormEventHandler } from 'react'
+import React from 'react'
 import Strings from '../../json/strings.json'
 import Icons from '../../json/icons.json'
 import Icon from '../Icon/Icon'
@@ -6,7 +6,7 @@ import { Form, InputGroup } from 'react-bootstrap'
 import './SearchBox.scss'
 
 type Props = {
-	onInput: FormEventHandler
+	onInput: React.FormEventHandler
 }
 
 const SearchBox = React.forwardRef<HTMLInputElement, Props>((props: Props, ref) => {

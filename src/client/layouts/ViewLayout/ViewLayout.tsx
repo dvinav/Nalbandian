@@ -10,12 +10,21 @@ import TableHead from '../../components/TableHead/TableHead'
 import PascalCase from '../../utils/PascalCase'
 import GetCol from '../../utils/GetCol'
 import SearchBox from '../../components/SearchBox/SearchBox'
+import ContextMenu from '../../components/ContextMenu/ContextMenu'
+
+type CTX = {
+	show: boolean
+	col?: number
+	id?: string
+	pos?: number[]
+}
 
 type State = {
 	rows: any[]
 	isSearching: boolean
 	currentRowId: string
 	scrollShadow: boolean
+	ctx: CTX
 }
 
 type Props = {
@@ -27,8 +36,13 @@ type Props = {
 class ViewLayout extends React.Component<Props, State> {
 	private tableContainer: React.RefObject<HTMLDivElement>
 	private searchBox: React.RefObject<HTMLInputElement>
+	private contextMenu: React.RefObject<HTMLDivElement>
 
 	private rowIndex: number
+
+	private fetchData = () => {
+		Requests.GetMany(20, Number(GetCol(this.props.name)), 1).then((data) => this.setState({ rows: data }))
+	}
 
 	constructor(props: Props) {
 		super(props)
@@ -40,13 +54,21 @@ class ViewLayout extends React.Component<Props, State> {
 			isSearching: false,
 			currentRowId: '',
 			scrollShadow: false,
+			ctx: {
+				show: false,
+				col: 0,
+				id: '',
+				pos: [0, 0],
+			},
 		}
 
-		Requests.GetMany(20, Number(GetCol(this.props.name)), 1).then((data) => this.setState({ rows: data }))
+		this.fetchData()
 
 		this.tableContainer = React.createRef()
 
 		this.searchBox = React.createRef()
+
+		this.contextMenu = React.createRef()
 
 		this.rowIndex = 1
 	}
@@ -77,15 +99,30 @@ class ViewLayout extends React.Component<Props, State> {
 		}
 	}
 
+	private ctxMenuHandle = (e: React.MouseEvent, id: string) => {
+		e.preventDefault()
+		var ctxProps = {
+			show: true,
+			col: Number(GetCol(this.props.name)),
+			id: id,
+			pos: [e.clientX, e.clientY],
+		}
+		this.setState({ ctx: ctxProps })
+	}
+
+	private closeCtxMenu = (e: React.MouseEvent) => {
+		if (!this.contextMenu.current?.contains(e.target as Node)) this.setState({ ctx: { show: false } })
+	}
+
 	componentDidUpdate() {
 		this.rowIndex = 1
 	}
 
 	render() {
 		return (
-			<TabContainer>
+			<TabContainer onClick={this.closeCtxMenu}>
 				<FormContainer
-					col={3}
+					col={Number(GetCol(this.props.name))}
 					onResult={(row: object, id: string) => {
 						this.state.rows.unshift(row)
 						this.setState({ currentRowId: id })
@@ -105,11 +142,25 @@ class ViewLayout extends React.Component<Props, State> {
 									key={key}
 									row={this.rowIndex++}
 									id={this.state.currentRowId != '' ? this.state.currentRowId : row._id}
+									onContextMenu={(e) =>
+										this.ctxMenuHandle(e, this.state.currentRowId != '' ? this.state.currentRowId : row._id)
+									}
 								/>
 							))}
 						</tbody>
 					</Table>
 				</TableContainer>
+				<ContextMenu
+					show={this.state.ctx.show}
+					col={this.state.ctx.col != null ? this.state.ctx.col : 0}
+					id={this.state.ctx.id != null ? this.state.ctx.id : ''}
+					pos={this.state.ctx.pos != null ? this.state.ctx.pos : [-1, -1]}
+					onDelete={() => {
+						this.fetchData()
+						this.setState({ ctx: { show: false } })
+					}}
+					ref={this.contextMenu}
+				/>
 			</TabContainer>
 		)
 	}
