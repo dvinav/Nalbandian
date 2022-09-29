@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "CommonJS",
+		"jsx": "react",
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"removeComments": true,
+		"allowJs": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "src",
+		"paths": {
+			"@components/*": ["components/*"],
+			"@utils/*": ["utils/*"],
+			"@api/*": ["api/*"],
+			"@layouts/*": ["layouts/*"],
+			"@views/*": ["views/*"],
+			"@res/*": ["res/*"]
+		}
+	},
+	"include": ["src/index.tsx"]
+}

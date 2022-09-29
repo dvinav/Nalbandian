@@ -1,16 +1,16 @@
 {
-    "version": "2.0.0",
-    "tasks": [
+	"version": "2.0.0",
+	"tasks": [
 		{
-			"label": "Webpack Dev",
+			"label": "Develop",
 			"type": "shell",
-			"command": "npx webpack --config ./config/client/webpack.config.ts --watch",
+			"command": "npx webpack --config ./webpack/webpack.config.ts --config-name server.dev --config-name client.dev --watch",
 			"problemMatcher": []
 		},
 		{
 			"label": "Build",
 			"type": "shell",
-			"command": "npm run build",
+			"command": "npx webpack --config ./webpack/webpack.config.ts --config-name server.prod --config-name client.prod",
 			"problemMatcher": []
 		}
 	]

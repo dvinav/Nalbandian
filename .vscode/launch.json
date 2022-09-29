@@ -7,12 +7,9 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Run Dev Server",
-			"runtimeExecutable": "npm",
-			"runtimeArgs": [
-				"run",
-				"dev"
-			],
+			"name": "Run nodemon",
+			"runtimeExecutable": "nodemon",
+			"runtimeArgs": ["server.js"],
 			"serverReadyAction": {
 				"action": "openExternally",
 				"uriFormat": "http://localhost:%s"

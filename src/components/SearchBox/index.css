@@ -1,0 +1,24 @@
+.searchBox {
+	position: sticky;
+	top: 0;
+	z-index: 3;
+}
+
+.searchBox .input-group-text {
+	background: #fff;
+	border-right: none;
+	border-left: none;
+}
+
+.searchBox input {
+	border-left: none;
+}
+
+.searchBox input.form-control:focus {
+	border-color: #ced4da !important;
+}
+
+.searchBox>* {
+	border-radius: 0 !important;
+	border-top: none !important;
+}

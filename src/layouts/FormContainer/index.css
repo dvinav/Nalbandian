@@ -1,0 +1,18 @@
+.formContainer {
+	flex: 0 0 22%;
+	border-right: 1px solid var(--bs-gray-400);
+	height: calc(100vh - var(--header-height));
+	overflow-y: auto;
+}
+
+.formContainer button {
+	width: 100%;
+}
+
+.formContainer button i {
+	font-size: 1.3rem;
+}
+
+.formContainer input[type='file']::file-selector-button {
+	display: none;
+}
