@@ -1,17 +1,17 @@
-import Icon from '@components/Icon'
-import Icons from '@res/icons'
-import Strings from '@res/strings'
 import React from 'react'
 import { InputGroup, Form, Row } from 'react-bootstrap'
+import Icon from 'components/Icon'
+import { getIcon, getString } from 'utils/get'
+import styles from 'styles/form.module.sass'
 
-export default (props: { name: string }) => {
+export default (p: { name: string }) => {
 	return (
-		<Row className="g-2">
+		<Row className={'g-2 ' + styles.rowClass}>
 			<InputGroup>
 				<InputGroup.Text>
-					<Icon>{Icons[props.name]}</Icon>
+					<Icon>{getIcon(p.name)}</Icon>
 				</InputGroup.Text>
-				<Form.Control placeholder={Strings[props.name] as string} name={props.name} />
+				<Form.Control placeholder={getString(p.name)} name={p.name} />
 			</InputGroup>
 		</Row>
 	)

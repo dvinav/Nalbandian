@@ -1,0 +1,73 @@
+@use '../variables'
+
+.header
+	display: flex
+	height: variables.$header-height
+	width: 100%
+	border-bottom: 1px solid var(--bs-gray-400)
+	user-select: none
+	color: var(--bs-gray-800)
+
+	& > *
+		display: flex
+		height: 100%
+		flex: 1
+		align-items: center
+
+.left
+	flex: 1
+
+	span
+		line-height: 27px
+		font-size: 27px
+		margin-left: 25px
+
+.right
+	flex-direction: row-reverse
+	flex: 1
+
+.center
+	flex: 2
+	position: relative
+
+.indicator
+	background: variables.$primary
+	width: 23.333%
+	height: 5px
+	align-self: flex-end
+	position: absolute
+	border-radius: 50px 50px 0 0
+	transition: 200ms
+	will-change: margin-left
+
+.formToggle
+	background: none
+	color: var(--bs-gray-800)
+	border: none
+	border-radius: 50px
+	height: 40px
+	width: 40px
+	margin-left: 12px
+	transition: background 100ms
+	&:hover
+		background: var(--bs-gray-200)
+	&:active
+		background: var(--bs-gray-300)
+
+.tabButton
+	flex: 1
+	display: flex
+	align-items: center
+	justify-content: center
+	cursor: pointer
+	transition: all 150ms ease
+	height: 100%
+	& > span
+		font-size: 17px
+		display: inline-flex
+		pointer-events: none
+		align-items: center
+	&:hover
+		background: #f9f9f9
+	i
+		margin-right: 5px

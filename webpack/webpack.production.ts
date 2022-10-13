@@ -44,11 +44,21 @@ const clientConfig = {
 				},
 			},
 			{
-				test: /\.css$/,
+				test: /\.(sa|sc|c)ss$/,
 				use: [
 					MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
+						options: {
+							sourceMap: false,
+						},
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							sourceMap: false,
+							implementation: require('sass'),
+						},
 					},
 				],
 			},
@@ -76,13 +86,17 @@ const clientConfig = {
 	],
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.jsx'],
-		alias: {
-			'@components': path.resolve(__dirname, '../src/components/'),
-			'@utils': path.resolve(__dirname, '../src/utils/'),
-			'@api': path.resolve(__dirname, '../src/api/'),
-			'@layouts': path.resolve(__dirname, '../src/layouts/'),
-			'@views': path.resolve(__dirname, '../src/views/'),
-			'@res': path.resolve(__dirname, '../src/res/'),
+		// prettier-ignore
+		alias: { 
+			'app': path.resolve(__dirname, '../src/app/index.tsx'),
+			'style-imports': path.resolve(__dirname, '../src/styles/imports.sass'),
+			'styles': path.resolve(__dirname, '../src/styles/modules/'),
+			'components': path.resolve(__dirname, '../src/components/'),
+			'utils': path.resolve(__dirname, '../src/utils/'),
+			'api': path.resolve(__dirname, '../src/api/'),
+			'layouts': path.resolve(__dirname, '../src/layouts/'),
+			'pages': path.resolve(__dirname, '../src/pages/'),
+			'res': path.resolve(__dirname, '../src/res/'),
 		},
 	},
 	entry: path.resolve(__dirname, '../src/index.tsx'),
@@ -119,8 +133,11 @@ const serverConfig = {
 	},
 	resolve: {
 		extensions: ['.ts', '.js'],
+		// prettier-ignore
 		alias: {
-			'@utils': path.resolve(__dirname, '../src/utils/'),
+			'utils': path.resolve(__dirname, '../src/utils/'),
+			'types': path.resolve(__dirname, '../src/types/'),
+			'res': path.resolve(__dirname, '../src/res/'),
 		},
 	},
 	output: {

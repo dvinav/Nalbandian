@@ -1,4 +1,4 @@
-export const DeleteDoc = (col: number, id: String, callback: Function) => {
+export const DeleteDoc = (col: number, id: string, callback: Function) => {
 	fetch('/delete', {
 		method: 'POST',
 		headers: {
@@ -31,12 +31,10 @@ export const AddDoc = async (fd: FormData, callback: Function) => {
 	fetch('/upload', {
 		method: 'POST',
 		body: fd,
-	})
-		.then((res) => res.text())
-		.then((data) => callback(data))
+	}).then(() => callback())
 }
 
-export const GetByQuery = (query: String, col: number, callback: Function) => {
+export const GetByQuery = (query: string, col: number, callback: Function) => {
 	fetch('/getByQuery', {
 		method: 'POST',
 		headers: {
@@ -62,6 +60,5 @@ export const GetOne = async (id: string, col: number) => {
 			collection: col,
 		}),
 	})
-	const data = await res.json()
-	return data
+	return await res.json()
 }

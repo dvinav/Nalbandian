@@ -1,6 +1,7 @@
-import Icon from '@components/Icon'
-import Icons from '@res/icons'
+import Icon from 'components/Icon'
+import Icons from 'res/icons'
 import React from 'react'
+import styles from 'styles/table.module.sass'
 
 type Props = {
 	doc: any
@@ -45,7 +46,7 @@ export default (props: Props) => {
 					<td>{props.doc.translator != '' ? props.doc.translator : '-'}</td>
 					<td>{props.doc.code}</td>
 					<td>
-						<a target="blank" href={String(!props.doc.ebook && '')} className={String(!props.doc.ebook && 'disabled')}>
+						<a target="blank" href={props.doc.ebook} className={String(!props.doc.ebook && styles.disabledLink)}>
 							<Icon>{Icons.ebook}</Icon>
 						</a>
 					</td>

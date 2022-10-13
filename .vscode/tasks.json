@@ -2,15 +2,15 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Develop",
+			"label": "Webpack: Dev",
 			"type": "shell",
-			"command": "npx webpack --config ./webpack/webpack.config.ts --config-name server.dev --config-name client.dev --watch",
+			"command": "webpack --config ./webpack/webpack.config.ts --config-name server.dev --config-name client.dev --watch",
 			"problemMatcher": []
 		},
 		{
-			"label": "Build",
+			"label": "Webpack: Build",
 			"type": "shell",
-			"command": "npx webpack --config ./webpack/webpack.config.ts --config-name server.prod --config-name client.prod",
+			"command": "webpack --config ./webpack/webpack.config.ts --config-name server.prod --config-name client.prod",
 			"problemMatcher": []
 		}
 	]

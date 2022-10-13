@@ -5,15 +5,13 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "node",
+			"name": "nodemon",
+			"program": "${workspaceFolder}/server.js",
 			"request": "launch",
-			"name": "Run nodemon",
+			"restart": true,
 			"runtimeExecutable": "nodemon",
-			"runtimeArgs": ["server.js"],
-			"serverReadyAction": {
-				"action": "openExternally",
-				"uriFormat": "http://localhost:%s"
-			}
+			"skipFiles": ["<node_internals>/**"],
+			"type": "node"
 		}
 	]
 }

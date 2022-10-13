@@ -1,0 +1,35 @@
+@use '../variables'
+
+.tableContainer
+	overflow: auto
+	height: calc(100vh - var(--header-height))
+	top: var(--header-height)
+	user-select: none
+	transition: width 200ms cubic-bezier(.63,-0.01,.37,1)
+	width: 100%
+	table
+		border-left: none
+		thead
+			position: sticky
+			top: 37px
+			background-color: #fff
+			tr
+				transition: box-shadow 150ms
+				border-top: none !important
+
+		tr td:first-child,
+		tr th:first-child
+			text-align: center
+			color: var(--bs-gray-700)
+			border-left: none
+		tr i
+			z-index: -1
+			line-height: 20px
+
+.thS
+	border-bottom: 1px solid var(--bs-gray-300)
+	box-shadow: 0 1px 6px 0 #0000001a
+
+.disabledLink
+	color: var(--bs-gray-400)
+	pointer-events: none

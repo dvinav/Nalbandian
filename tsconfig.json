@@ -4,20 +4,22 @@
 		"module": "CommonJS",
 		"jsx": "react",
 		"esModuleInterop": true,
-		"skipLibCheck": true,
 		"removeComments": true,
 		"allowJs": true,
-		"suppressImplicitAnyIndexErrors": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "src",
+		"strict": true,
+		"baseUrl": "src/",
+		"plugins": [{ "name": "typescript-plugin-css-modules" }],
 		"paths": {
-			"@components/*": ["components/*"],
-			"@utils/*": ["utils/*"],
-			"@api/*": ["api/*"],
-			"@layouts/*": ["layouts/*"],
-			"@views/*": ["views/*"],
-			"@res/*": ["res/*"]
+			"style-imports": ["styles/imports.sass"],
+			"styles/*": ["styles/modules/*"],
+			"components/*": ["components/*"],
+			"utils/*": ["utils/*"],
+			"layouts/*": ["layouts/*"],
+			"pages/*": ["pages/*"],
+			"res/*": ["res/*"],
+			"types/*": ["types/*"]
 		}
 	},
-	"include": ["src/index.tsx"]
+	"include": ["src/index.tsx", "src/global.d.ts"]
 }

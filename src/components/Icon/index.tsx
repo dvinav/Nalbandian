@@ -1,6 +1,5 @@
 import React from 'react'
-import 'material-icons/iconfont/material-icons.css'
-import './index.css'
+import styles from 'styles/icons.module.sass'
 
 type Props = {
 	children: React.ReactNode
@@ -9,7 +8,7 @@ type Props = {
 
 const Icon = (props: Props) => {
 	return (
-		<i className="material-icons-round" role="button" style={props.style}>
+		<i className={'material-icons-round ' + styles.icon} role="button" style={props.style}>
 			{props.children}
 		</i>
 	)
