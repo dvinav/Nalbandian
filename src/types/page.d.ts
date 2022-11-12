@@ -16,31 +16,15 @@ export type Props = {
 export type State = {
 	formState: FormStates
 	rows: Array<Doc>
-	ctxData:
-		| {
-				pos: Position
-				target: Node
-		  }
-		| undefined
-}
-
-export type Layouts = {
-	deleteModal: boolean
-	infoModal: boolean
-}
-
-export type Vars = {
-	show: Layouts
-	selectedDoc: string
+	ctxEvent: React.MouseEvent | undefined
+	showDeleteModal: boolean
+	showInfoModal: boolean
+	selectedDoc: Doc
+	selectedId: string
 	addedData: [Doc, string]
 }
-
 export interface Interface {
-	vars: Vars
-
-	toggle(el: keyof Layouts): void
-	show(el: keyof Layouts): void
-	hide(el: keyof Layouts): void
-	select(id: string): void
+	showInfoModal(s: boolean): void
+	showDeleteModal(s: boolean): void
 	handleRowEvent(e: MouseEvent, id: string): void
 }

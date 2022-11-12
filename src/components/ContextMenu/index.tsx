@@ -4,131 +4,70 @@ import Icon from 'components/Icon'
 import { getIcon, getString } from 'utils/get'
 import styles from 'styles/ctxmenu.module.sass'
 import { Position } from 'types/general'
+import e from 'cors'
 
 type Props = {
-	data:
-		| {
-				pos: Position
-				target: Node
-		  }
-		| undefined
+	event: React.MouseEvent | undefined
 	delete: Function
 	edit: Function
-	ref: React.ForwardedRef<HTMLDivElement>
+	extRef: React.RefObject<HTMLDivElement>
 }
 
-/* var currentPos = [0, 0]
-
-const CSS = (vis: boolean, e: React.MouseEvent, ref: React.RefObject<HTMLDivElement>): object => {
-	var pos = [e.clientX, e.clientY]
-
-	if (!ref.current?.contains(e.target as Node) && vis) {
-		if (pos[0] > -1 && pos[1] > -1) {
-			currentPos = [pos[0], pos[1]]
-			return {
-				pointerEvents: 'all',
-				opacity: 1,
-				top: pos[1] + 'px',
-				left: pos[0] + 'px',
-			}
-		} else
-			return {
-				pointerEvents: 'all',
-				opacity: 1,
-				top: currentPos[1] + 'px',
-				left: currentPos[0] + 'px',
-			}
-	} else
-		return {
-			pointerEvents: 'none',
-			opacity: 0,
-			top: currentPos[1] + 'px',
-			left: currentPos[0] + 'px',
-		}
-}
-
-type Props = {
-	event: React.MouseEvent
-	delete: Function
-	edit: Function
-}
-
-const ContextMenu = (p: Props) => {
-	const [isOpen, show] = useState(false)
-
-	const ref = useRef()
-
-	p.event.preventDefault()
-
-	return (
-		<Dropdown className={styles.contextMenuClass} style={CSS(isOpen, p.event, ref)} show={true} ref={ref}>
-			<Dropdown.Menu className={styles.dropdownMenuClass}>
-				<Dropdown.Item onClick={() => p.edit()}>
-					<Icon>{getIcon()}</Icon>
-					{Strings.edit}
-				</Dropdown.Item>
-				<Dropdown.Item onClick={() => p.delete()}>
-					<Icon>{Icons.delete}</Icon>
-					{Strings.delete}
-				</Dropdown.Item>
-			</Dropdown.Menu>
-		</Dropdown>
-	)
-}
- */
 class ContextMenu extends React.PureComponent<Props> {
 	constructor(p: Props) {
 		super(p)
-
-		this.state = {
-			pos: [0, 0],
-		}
 	}
 
-	/* componentDidUpdate(): void {
-		if (this.ref.current && this.props.data) {
-			if (this.props.data.pos && !this.ref.current?.contains(this.props.data.target)) {
-				if (this.props.data.pos[1] > 0 && this.props.data.pos[0] > 0) {
-					this.ref.current.style.pointerEvents = 'all'
-					this.ref.current.style.opacity = '1'
-					this.ref.current.style.top = this.props.data.pos[1] + 'px'
-					this.ref.current.style.left = this.props.data.pos[0] + 'px'
-				} else {
-					this.ref.current.style.pointerEvents = 'none'
-					this.ref.current.style.opacity = '0'
-					this.ref.current.style.top = this.props.data.pos[1] + 'px'
-					this.ref.current.style.left = this.props.data.pos[0] + 'px'
-				}
-			} else {
-				this.ref.current.style.pointerEvents = 'none'
-				this.ref.current.style.opacity = '0'
-				this.ref.current.style.top = this.props.data.pos[1] + 'px'
-				this.ref.current.style.left = this.props.data.pos[0] + 'px'
-			}
-		}
-	} */
+	currentPos = [0, 0]
 
 	checkPos = (): boolean => {
-		if (this.props.data) return this.props.data.pos[0] > 0 && this.props.data.pos[1] > 0
+		if (this.props.event) return this.props.event.clientX > 0 && this.props.event.clientY > 0
 		else return false
+	}
+
+	setStyle = (): React.CSSProperties => {
+		if (this.props.event) {
+			var pos = [this.props.event.clientX, this.props.event.clientY]
+			this.currentPos = pos
+			if (!this.props.extRef.current?.contains(this.props.event.target as Node) && this.checkPos()) {
+				return {
+					pointerEvents: 'all',
+					opacity: 1,
+					top: pos[1] + 'px',
+					left: pos[0] + 'px',
+				}
+			} else
+				return {
+					pointerEvents: 'all',
+					opacity: 1,
+					top: pos[1] + 'px',
+					left: pos[0] + 'px',
+				}
+		} else
+			return {
+				top: this.currentPos[1] + 'px',
+				left: this.currentPos[0] + 'px',
+				opacity: '0',
+				pointerEvents: 'none',
+			}
 	}
 
 	render() {
 		return (
-			<Dropdown className={styles.contextMenuClass} show={this.checkPos()} ref={this.props.ref}>
-				<Dropdown.Menu className={styles.dropdownMenuClass}>
-					<Dropdown.Item onClick={() => this.props.edit()}>
+			<div className={styles.contextMenuClass} style={this.setStyle()} ref={this.props.extRef}>
+				<ul className={styles.listClass}>
+					<li onClick={() => this.props.edit()}>
 						<Icon>{getIcon('edit')}</Icon>
 						{getString('edit')}
-					</Dropdown.Item>
-					<Dropdown.Item onClick={() => this.props.delete()}>
+					</li>
+					<li onClick={() => this.props.delete()}>
 						<Icon>{getIcon('delete')}</Icon>
 						{getString('delete')}
-					</Dropdown.Item>
-				</Dropdown.Menu>
-			</Dropdown>
+					</li>
+				</ul>
+			</div>
 		)
 	}
 }
 
-export default React.forwardRef((props, ref) => <ContextMenu ref={ref} {...props} />)
+export default ContextMenu

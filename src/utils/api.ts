@@ -31,7 +31,21 @@ export const AddDoc = async (fd: FormData, callback: Function) => {
 	fetch('/upload', {
 		method: 'POST',
 		body: fd,
-	}).then(() => callback())
+	})
+		.then((res) => res.json())
+		.then((data) => callback(data))
+}
+
+export const EditDoc = async (fd: FormData, id: string, callback: Function) => {
+	fetch('/edit', {
+		method: 'POST',
+		body: JSON.stringify({
+			fd: fd,
+			id: id,
+		}),
+	})
+		.then((res) => res.json())
+		.then((data) => callback(data))
 }
 
 export const GetByQuery = (query: string, col: number, callback: Function) => {

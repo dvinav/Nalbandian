@@ -81,7 +81,7 @@ class Table extends React.PureComponent<Props, States> {
 								doc={row}
 								key={key}
 								row={this.vars.rowIndex++}
-								id={this.checkRow(row._id)}
+								id={row._id}
 								onContextMenu={(e: React.MouseEvent) => this.props.event(e, this.checkRow(row._id))}
 								onClick={(e: React.MouseEvent) => this.props.event(e, this.checkRow(row._id))}
 							/>

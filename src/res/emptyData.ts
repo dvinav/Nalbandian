@@ -1,6 +1,6 @@
 import { Book, Member, Borrowed } from 'types/documents'
 
-const book: Book = {
+const books: Book = {
 	title: '-',
 	author: '-',
 	subtitle: '-',
@@ -14,7 +14,7 @@ const book: Book = {
 	publishing: '-',
 }
 
-const member: Member = {
+const members: Member = {
 	address: '-',
 	name: '-',
 	surname: '-',
@@ -33,4 +33,4 @@ const borrowed: Borrowed = {
 	returnDate: '-',
 }
 
-export { book, member, borrowed }
+export { books, members, borrowed }

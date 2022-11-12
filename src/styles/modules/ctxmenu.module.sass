@@ -5,21 +5,24 @@
 	height: 100px
 	border-radius: 5px
 	box-shadow: 0 2px 7px 0 #00000050
-	transition: opacity 200ms
+	transition: opacity 50ms
 	z-index: 999
 
-.dropdownMenuClass
+.listClass
 	width: 100%
 	height: 100%
 	display: flex
 	flex-direction: column
-	a
+	padding: 7px 0 6px 0
+	li
+		padding: 0 15px 0 15px
 		display: inline-flex
 		height: 42px
 		align-items: center
 		color: var(--bs-primary)
+		cursor: pointer
 		&:hover
-			color: var(--bs-primary)
+			background: var(--bs-gray-200)
 		&:active
 			background: var(--bs-gray-400)
 		i

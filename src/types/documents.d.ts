@@ -6,7 +6,7 @@ export type Member = {
 	phone: string
 	home: string
 	address: string
-	memberCode: string
+	code: string
 	picture: string
 }
 
@@ -21,7 +21,7 @@ export type Book = {
 	publishLocation: string
 	language: string
 	ISBN: string
-	bookCode: string
+	code: string
 	ebook: string
 }
 

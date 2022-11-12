@@ -7,6 +7,7 @@ export type Props = {
 	name: CollectionNames
 	show: boolean
 	state: FormStates
+	editId: string
 	setState: (s: FormStates) => void
 	result: (fd: Doc, id: string) => void
 }

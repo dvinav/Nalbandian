@@ -26,3 +26,10 @@ export type Delete = {
 	id: string
 	collection: CollectionNumbers
 }
+
+export type Edit = {
+	id: string
+	fd: Doc & {
+		collection?: CollectionNumbers
+	}
+}

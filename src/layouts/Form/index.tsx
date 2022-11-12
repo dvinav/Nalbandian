@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { AddDoc } from 'utils/api'
+import { AddDoc, EditDoc } from 'utils/api'
 import unquote from 'utils/unquote'
 import { FormButtons } from 'components/FormControls'
 import styles from 'styles/form.module.sass'
@@ -28,12 +28,14 @@ class Form extends React.PureComponent<Props, States> {
 				this.props.setState(0)
 				this.props.result(Object.fromEntries(fd) as Doc, id)
 			})
+		} else if (this.props.state == 2) {
+			EditDoc(fd, this.props.editId, (id: string) => {
+				this.formRef?.current?.reset()
+				this.props.setState(0)
+				this.props.result(Object.fromEntries(fd) as Doc, id)
+			})
 		}
 	}
-
-	/* componentDidUpdate(): void {
-		console.log(this.props.state)
-	} */
 
 	render() {
 		return (
@@ -74,56 +76,3 @@ class Form extends React.PureComponent<Props, States> {
 }
 
 export default Form
-/* const FormContainer = (p: Props) => {
-	const formRef = useRef<HTMLFormElement>(null)
-	return (
-		<div className={styles.formContainerClass}>
-			<form
-				data-col={props.col}
-				encType="multipart/form-data"
-				onSubmit={(e) => {
-					e.preventDefault()
-					var fd = new FormData(e.target as HTMLFormElement)
-					fd.append('collection', String(props.col))
-					if (props.formState == 1) {
-						AddDoc(fd, (id: string) => {
-							formRef?.current?.reset()
-							props.switchFormState(0)
-							props.onResult(Object.fromEntries(fd), unquote(id))
-						})
-					}
-				}}
-				ref={formRef}
-			>
-				<Container className="p-2">
-					<Row className="g-2">
-						<Col>
-							<FormButtons.AddButton onClick={() => props.switchFormState(1)} disabled={Boolean(props.formState)} />
-						</Col>
-						<Col>
-							<FormButtons.ClearButton onClick={() => formRef?.current?.reset()} disabled={!Boolean(props.formState)} />
-						</Col>
-					</Row>
-					<fieldset disabled={!Boolean(props.formState)}>{props.children}</fieldset>
-					<Row className={'g-2 ' + styles.rowClass}>
-						<Col>
-							<FormButtons.CancelButton
-								onClick={() => {
-									props.switchFormState(0)
-									formRef?.current?.reset()
-								}}
-								disabled={!Boolean(props.formState)}
-							/>
-						</Col>
-						<Col>
-							<FormButtons.SubmitButton disabled={!Boolean(props.formState)} />
-						</Col>
-					</Row>
-				</Container>
-			</form>
-		</div>
-	)
-}
-
-export default FormContainer
- */

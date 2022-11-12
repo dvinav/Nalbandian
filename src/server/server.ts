@@ -39,6 +39,8 @@ const init = () => {
 
 	app.post(config.url.delete, async (req: any, res: any) => res.send(await Request.Delete(con, req.body)))
 
+	app.post(config.url.edit, async (req: any, res: any) => res.send(await Request.Edit(con, req.body)))
+
 	app.post(config.url.upload, Upload.single('picture'), async (req: any, res: any) => {
 		console.log(req?.file?.filename)
 		if (req?.file?.filename) req.body.picture = req?.file?.filename

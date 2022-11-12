@@ -39,8 +39,8 @@ const Strings = {
 	delete: 'Ջնջել',
 	deleteConfirmation: 'Ջնջե՞լ Գրանցումը:',
 	close: 'Փակել',
-	bookInfo: 'Գրքի Տեղեկություն',
-	memberInfo: 'Անդամի Տեղեկություն',
+	booksInfo: 'Գրքի Տեղեկություն',
+	membersInfo: 'Անդամի Տեղեկություն',
 	language: 'Լեզու',
 	other: 'Ուրիշ',
 }
