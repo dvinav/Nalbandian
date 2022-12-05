@@ -1,0 +1,13 @@
+{
+	"name": "Գրադարան",
+	"short_name": "Nalbandian",
+	"start_url": "books",
+	"display": "standalone",
+	"theme_color": "#f9f9f9",
+	"icons": [
+		{
+			"src": "/favicon.ico",
+			"type": "image/image/x-icon"
+		}
+	]
+}

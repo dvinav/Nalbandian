@@ -1,8 +1,7 @@
 import React from 'react'
 import { Button } from 'react-bootstrap'
 import Icon from 'components/Icon'
-import Icons from 'res/icons'
-import Strings from 'res/strings'
+import { getString, getIcon } from 'utils/get'
 
 type Props = {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>
@@ -13,32 +12,32 @@ export default {
 	AddButton: (props: Props) => {
 		return (
 			<Button variant="primary" onClick={props.onClick} disabled={props.disabled}>
-				<Icon>{Icons.add}</Icon>
-				{Strings.add}
+				<Icon>{getIcon('add')}</Icon>
+				{getString('add')}
 			</Button>
 		)
 	},
 	ClearButton: (props: Props) => {
 		return (
 			<Button variant="primary" onClick={props.onClick} disabled={props.disabled}>
-				<Icon>{Icons.clear}</Icon>
-				{Strings.clear}
+				<Icon>{getIcon('clear')}</Icon>
+				{getString('clear')}
 			</Button>
 		)
 	},
 	SubmitButton: (props: Props) => {
 		return (
 			<Button variant="success" type="submit" onClick={props.onClick} disabled={props.disabled}>
-				<Icon>{Icons.submit}</Icon>
-				{Strings.submit}
+				<Icon>{getIcon('submit')}</Icon>
+				{getString('submit')}
 			</Button>
 		)
 	},
 	CancelButton: (props: Props) => {
 		return (
 			<Button variant="danger" onClick={props.onClick} disabled={props.disabled}>
-				<Icon>{Icons.cancel}</Icon>
-				{Strings.cancel}
+				<Icon>{getIcon('cancel')}</Icon>
+				{getString('cancel')}
 			</Button>
 		)
 	},

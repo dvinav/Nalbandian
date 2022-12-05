@@ -1,4 +1,8 @@
-## Create users:
+# Initialize:
+
+1. Create database **Nalbandian**
+2. Create collection **keys**
+3. Create users:
 
 ```shell
 use admin
@@ -16,4 +20,8 @@ db.createUser(
 })
 ```
 
-	
+4.  Enable authorization
+    > Add this to `C:\Program Files\MongoDB\Server\6.0\bin`
+        security:
+            authorization: enabled
+5.  Restart MongoDB service

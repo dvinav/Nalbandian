@@ -1,10 +1,11 @@
 import { Book, Member, Borrowed } from 'types/documents'
 
 const books: Book = {
+	_id: '',
 	title: '-',
 	author: '-',
 	subtitle: '-',
-	bookCode: '-',
+	code: '-',
 	language: '-',
 	publishDate: '-',
 	ISBN: '-',
@@ -15,6 +16,7 @@ const books: Book = {
 }
 
 const members: Member = {
+	_id: '',
 	address: '-',
 	name: '-',
 	surname: '-',
@@ -26,10 +28,10 @@ const members: Member = {
 }
 
 const borrowed: Borrowed = {
-	bookID: '-',
-	memberID: '-',
+	_id: '',
+	book: '-',
+	member: '-',
 	borrowDate: '-',
-	deadline: '-',
 	returnDate: '-',
 }
 

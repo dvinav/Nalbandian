@@ -2,17 +2,19 @@ import React from 'react'
 import { Routes, Route, Outlet, useLocation, Navigate, To } from 'react-router-dom'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Header from 'layouts/Header'
-import Page from 'layouts/Page'
+import View from 'layouts/View'
 import { getCol } from 'utils/get'
 import { CollectionNames, CollectionNumbers } from 'types/general'
 import 'style-imports'
 import tabfade from 'styles/tabfade.module.sass'
+import BorrowedView from 'layouts/BorrowedView'
+import Login from './login'
 
-const defaultTab: CollectionNumbers = 3
+const defaultTab: CollectionNumbers = 1
 
-const App = () => {
+const MainPage = () => {
 	const location = useLocation()
-	const [formState, setFormState] = React.useState(true)
+	const [formState, setFormState] = React.useState(false)
 
 	return (
 		<>
@@ -35,9 +37,9 @@ const App = () => {
 					timeout={800}
 				>
 					<Routes location={location}>
-						<Route path="/borrowed" element={<Page name="borrowed" isFormOpen={formState} />} />
-						<Route path="/members" element={<Page name="members" isFormOpen={formState} />} />
-						<Route path="/books" element={<Page name="books" isFormOpen={formState} />} />
+						<Route path="/borrowed" element={<BorrowedView isFormOpen={formState} />} />
+						<Route path="/members" element={<View name="members" isFormOpen={formState} />} />
+						<Route path="/books" element={<View name="books" isFormOpen={formState} />} />
 						<Route path="/*" element={<Navigate to={getCol(defaultTab) as To} />} />
 					</Routes>
 				</CSSTransition>
@@ -47,4 +49,4 @@ const App = () => {
 	)
 }
 
-export default App
+export default MainPage

@@ -33,13 +33,23 @@ const init = () => {
 
 	app.post(config.url.getMany, async (req: any, res: any) => res.send(await Request.GetMany(con, req.body)))
 
+	app.post(config.url.insert, async (req: any, res: any) => res.send(await Request.InsertB(con, req.body)))
+
 	app.post(config.url.getByQuery, async (req: any, res: any) => res.send(await Request.GetByQuery(con, req.body)))
 
 	app.post(config.url.getOne, async (req: any, res: any) => res.send(await Request.GetOne(con, req.body)))
 
+	app.get(config.url.getImage, async (req: any, res: any) => res.sendFile(config.dir.upload + '/' + req.params.filename))
+
 	app.post(config.url.delete, async (req: any, res: any) => res.send(await Request.Delete(con, req.body)))
 
-	app.post(config.url.edit, async (req: any, res: any) => res.send(await Request.Edit(con, req.body)))
+	app.post(config.url.return, async (req: any, res: any) => res.send(await Request.Return(con, req.body)))
+
+	app.post(config.url.edit, Upload.single('picture'), async (req: any, res: any) => {
+		console.log(req?.file?.filename)
+		if (req?.file?.filename) req.body.picture = req?.file?.filename
+		res.send(await Request.Edit(con, req.body))
+	})
 
 	app.post(config.url.upload, Upload.single('picture'), async (req: any, res: any) => {
 		console.log(req?.file?.filename)

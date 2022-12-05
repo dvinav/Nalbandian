@@ -5,6 +5,8 @@ import { getString } from 'utils/get'
 import CC from 'components/Modals/infoModal/cell'
 import { CollectionNames } from 'types/general'
 import styles from 'styles/modals.module.sass'
+import { MonthNames } from 'res/months'
+import { getEmptyData } from 'utils/get'
 
 const Book: React.FC<{ doc: Book }> = ({ doc }) => {
 	return (
@@ -38,31 +40,47 @@ const Book: React.FC<{ doc: Book }> = ({ doc }) => {
 	)
 }
 
+const formatDate = (d: string): string => {
+	var arr = d.split('/')
+	var d = arr[0]
+	var m = arr[1]
+	var i = Number(m[0] == '0' ? m.replace('0', '') : m) - 1
+	var y = arr[2]
+	return d + ' ' + MonthNames[i] + ' ' + y
+}
+
+const uoe = (str: string): boolean => {
+	if (!str || str == '') return false
+	else return true
+}
+
 const Member: React.FC<{ doc: Member }> = ({ doc }) => {
 	return (
-		<div className="memberInfoContainer">
+		<div>
 			<div className={styles.pictureContainer}>
-				<img src={doc.picture != '' ? `uploads/${doc.picture}` : '/img/nopic.png'} />
+				<img src={uoe(doc.picture) ? `/getImage/${doc.picture}` : '/img/nopic.png'} />
 			</div>
-			<Table>
-				<tbody>
-					<tr>
-						<CC name="name" text={doc.name} />
-						<CC name="surname" text={doc.surname} />
-					</tr>
-					<tr>
-						<CC name="birthdate" text={doc.birthdate} />
-						<CC name="phone" text={doc.phone} />
-					</tr>
-					<tr>
-						<CC name="home" text={doc.home} />
-						<CC name="memberCode" text={doc.code} />
-					</tr>
-					<tr>
-						<CC name="address" text={doc.address} />
-					</tr>
-				</tbody>
-			</Table>
+			<div className={styles.tableContainer}>
+				<Table>
+					<tbody>
+						<tr>
+							<CC name="name" text={doc.name} />
+							<CC name="surname" text={doc.surname} />
+						</tr>
+						<tr>
+							<CC name="birthdate" text={formatDate(doc.birthdate)} />
+							<CC name="phone" text={doc.phone} />
+						</tr>
+						<tr>
+							<CC name="home" text={doc.home} />
+							<CC name="memberCode" text={doc.memberCode} />
+						</tr>
+						<tr>
+							<CC name="address" text={doc.address} />
+						</tr>
+					</tbody>
+				</Table>
+			</div>
 		</div>
 	)
 }
@@ -85,7 +103,7 @@ const Layout = (p: LayoutProps) => {
 			return <Member doc={p.doc as Member} />
 			break
 		case 'borrowed':
-			return <Borrowed doc={p.doc as Borrowed} />
+			return <Borrowed doc={getEmptyData('borrowed') as Borrowed} />
 			break
 	}
 }

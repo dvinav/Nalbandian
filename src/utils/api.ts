@@ -36,15 +36,12 @@ export const AddDoc = async (fd: FormData, callback: Function) => {
 		.then((data) => callback(data))
 }
 
-export const EditDoc = async (fd: FormData, id: string, callback: Function) => {
+export const EditDoc = async (fd: FormData, callback: Function) => {
 	fetch('/edit', {
 		method: 'POST',
-		body: JSON.stringify({
-			fd: fd,
-			id: id,
-		}),
+		body: fd,
 	})
-		.then((res) => res.json())
+		.then((res) => res.text())
 		.then((data) => callback(data))
 }
 

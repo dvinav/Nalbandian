@@ -35,9 +35,10 @@ const Icons = {
 	delete: 'delete',
 	close: 'close',
 	openInNew: 'open_in_new',
-	// formHidden: 'keyboard_arrow_right',
 	formHidden: 'keyboard_arrow_right',
 	formActive: 'keyboard_arrow_left',
+	confirm: 'check',
+	key: 'key',
 }
 
 export default Icons

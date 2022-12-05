@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { KeyboardEvent } from 'react'
 import { TextField, Select, FileInput } from 'components/FormControls'
-import Strings from 'res/strings'
+import { getString } from 'utils/get'
 
 const books = (
 	<>
@@ -13,9 +13,9 @@ const books = (
 		<TextField name="translator" />
 		<TextField name="ISBN" />
 		<Select name="language" defaultValue="hy">
-			<option value="hy">{Strings.hy}</option>
-			<option value="fa">{Strings.fa}</option>
-			<option value="en">{Strings.en}</option>
+			<option value="hy">{getString('hy')}</option>
+			<option value="fa">{getString('fa')}</option>
+			<option value="en">{getString('en')}</option>
 		</Select>
 		<TextField name="bookCode" />
 		<TextField name="ebook" />
@@ -26,8 +26,8 @@ const members = (
 	<>
 		<TextField name="name" />
 		<TextField name="surname" />
-		<TextField name="birthdate" />
-		<TextField name="phone" />
+		<TextField name="birthdate" date />
+		<TextField name="phone" number />
 		<TextField name="home" />
 		<TextField name="address" />
 		<FileInput name="memberPicture" />

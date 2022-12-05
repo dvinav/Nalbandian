@@ -27,18 +27,37 @@
 		margin-right: 8px
 
 .membersInfo
-	display: flex
+	--bs-modal-width: 70%
+	& > div > div > div > div
+		display: flex
+		gap: 20px
+		flex-direction: row
+
+.tableContainer
+	flex: 4
+	table
+		height: 100%
+		vertical-align: middle
+		tbody
+			padding: 0
+		td
+			border: 0
+			i
+				margin-right: 10px
 
 .pictureContainer
 	flex: 1
-	padding: 20px
-	display: flex
-	align-items: center
+	margin: auto
 	img
+		height: 100%
 		width: 100%
-		max-height: 100%
-		margin: auto
+		display: block
 		box-shadow: 0 2px 5px 1px #00000040
 		border-radius: 5px
-	table
-		flex: 4
+
+.thS
+	border-bottom: 1px solid var(--bs-gray-300)
+	box-shadow: 0 1px 6px 0 #0000001a
+
+.tC
+	border: 2px solid red

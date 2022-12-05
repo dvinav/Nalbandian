@@ -3,7 +3,7 @@ import { CollectionNames } from 'types/general'
 import { MouseEvent } from 'react'
 
 export type Props = {
-	name: CollectionNames
+	name: 'books' | 'members'
 	event: (e: MouseEvent, id: string) => void
 	expand: boolean
 	data: Array<Doc>

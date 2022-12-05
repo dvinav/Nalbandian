@@ -18,8 +18,8 @@ export default (props: Props) => {
 			return (
 				<tr data-id={props.id} onContextMenu={props.onContextMenu} onClick={props.onClick}>
 					<td>{props.row}</td>
-					<td>{props.doc.member != null ? props.doc.member : '-'}</td>
-					<td>{props.doc.book != null ? props.doc.book : '-'}</td>
+					<td>{props.doc.member}</td>
+					<td>{props.doc.book}</td>
 					<td>sdfsdfsdf</td>
 					<td>sdfsdfdsf</td>
 					<td>sdfsdfdsf</td>

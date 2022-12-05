@@ -11,6 +11,7 @@ type Props = {
 	delete: Function
 	edit: Function
 	extRef: React.RefObject<HTMLDivElement>
+	noctx?: boolean
 }
 
 class ContextMenu extends React.PureComponent<Props> {
@@ -56,10 +57,15 @@ class ContextMenu extends React.PureComponent<Props> {
 		return (
 			<div className={styles.contextMenuClass} style={this.setStyle()} ref={this.props.extRef}>
 				<ul className={styles.listClass}>
-					<li onClick={() => this.props.edit()}>
-						<Icon>{getIcon('edit')}</Icon>
-						{getString('edit')}
-					</li>
+					{!this.props.noctx ? (
+						<li onClick={() => this.props.edit()}>
+							<Icon>{getIcon('edit')}</Icon>
+							{getString('edit')}
+						</li>
+					) : (
+						<></>
+					)}
+
 					<li onClick={() => this.props.delete()}>
 						<Icon>{getIcon('delete')}</Icon>
 						{getString('delete')}

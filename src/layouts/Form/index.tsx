@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { AddDoc, EditDoc } from 'utils/api'
-import unquote from 'utils/unquote'
 import { FormButtons } from 'components/FormControls'
 import styles from 'styles/form.module.sass'
 import { Props, States } from 'types/form'
@@ -29,7 +28,8 @@ class Form extends React.PureComponent<Props, States> {
 				this.props.result(Object.fromEntries(fd) as Doc, id)
 			})
 		} else if (this.props.state == 2) {
-			EditDoc(fd, this.props.editId, (id: string) => {
+			fd.append('id', this.props.editId)
+			EditDoc(fd, (id: string) => {
 				this.formRef?.current?.reset()
 				this.props.setState(0)
 				this.props.result(Object.fromEntries(fd) as Doc, id)

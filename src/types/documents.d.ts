@@ -1,17 +1,17 @@
 export type Member = {
-	_id?: string
+	_id: string
 	name: string
 	surname: string
 	birthdate: string
 	phone: string
 	home: string
 	address: string
-	code: string
+	memberCode: string
 	picture: string
 }
 
 export type Book = {
-	_id?: string
+	_id: string
 	title: string
 	subtitle: string
 	author: string
@@ -26,11 +26,10 @@ export type Book = {
 }
 
 export type Borrowed = {
-	_id?: string
-	bookID: string
-	memberID: string
+	_id: string
+	book: string
+	member: string
 	borrowDate: string
-	deadline: string
 	returnDate: string
 }
 
