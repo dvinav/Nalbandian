@@ -22,6 +22,6 @@ db.createUser(
 
 4.  Enable authorization
     > Add this to `C:\Program Files\MongoDB\Server\6.0\bin`
-        security:
-            authorization: enabled
+    ````security:
+        authorization: enabled````
 5.  Restart MongoDB service
