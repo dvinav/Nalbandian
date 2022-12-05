@@ -2,8 +2,8 @@ import express from 'express'
 import path from 'path'
 import { Connection, InitializeDatabase } from './database'
 import { ServerConfig as config, Upload } from './config'
-import log from './log'
 import * as Request from './api'
+import fs from 'fs'
 
 const app = express()
 
@@ -23,13 +23,29 @@ const init = () => {
 
 	app.use(express.static(process.cwd() + config.dir.public))
 
-	app.use(config.dir.public, express.static(process.cwd() + config.dir.public))
+	app.listen('80')
 
 	app.get(config.routes, (req: any, res: any) => {
 		res.sendFile(path.resolve(__dirname + config.indexHTML))
 	})
 
-	app.listen(config.port, () => log.appStarted(config.port))
+	app.post('/auth', async (req: any, res: any) => {
+		fs.readFile('./pass.key', (err, data) => {
+			if (err) throw err
+			if (req.body.type == 'hash' && req.body.hash == data) {
+				Request.GenKey(con, String(data), (result: string) => {
+					res.send({
+						result: true,
+						key: result,
+					})
+				})
+			} else if (req.body.type == 'key') {
+				Request.CheckKey(con, req.body.key, (result: boolean) => {
+					res.send({ result: result })
+				})
+			} else res.send({ result: false })
+		})
+	})
 
 	app.post(config.url.getMany, async (req: any, res: any) => res.send(await Request.GetMany(con, req.body)))
 

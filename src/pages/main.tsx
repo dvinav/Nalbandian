@@ -12,6 +12,11 @@ import Login from './login'
 
 const defaultTab: CollectionNumbers = 1
 
+const checkLocation = (): Boolean => {
+	if (location.pathname == '/borrowed' || location.pathname == '/books' || location.pathname == '/members') return true
+	else return false
+}
+
 const MainPage = () => {
 	const location = useLocation()
 	const [formState, setFormState] = React.useState(false)
@@ -24,6 +29,7 @@ const MainPage = () => {
 				}
 				formToggle={() => setFormState(!formState)}
 				formState={formState}
+				show={checkLocation()}
 			/>
 			<TransitionGroup component={null}>
 				<CSSTransition

@@ -8,13 +8,14 @@ type Props = {
 	currentTab: number
 	formToggle: React.MouseEventHandler
 	formState: boolean
+	show: Boolean
 }
 
 const Header = (p: Props) => {
 	const [tab, switchTab] = React.useState(p.currentTab)
 
 	return (
-		<header className={styles.header}>
+		<header className={styles.header} style={!p.show ? { display: 'none' } : {}}>
 			<div className={styles.left}>
 				<button className={styles.formToggle} onClick={p.formToggle}>
 					{p.formState ? <Icon>{Icons.formActive}</Icon> : <Icon>{Icons.formHidden}</Icon>}
