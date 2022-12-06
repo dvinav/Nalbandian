@@ -8,7 +8,6 @@ import { CollectionNames, CollectionNumbers } from 'types/general'
 import 'style-imports'
 import tabfade from 'styles/tabfade.module.sass'
 import BorrowedView from 'layouts/BorrowedView'
-import Login from './login'
 
 const defaultTab: CollectionNumbers = 1
 

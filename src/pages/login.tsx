@@ -28,6 +28,8 @@ class Login extends React.PureComponent<Props, State> {
 
 		this.inputRef = React.createRef()
 
+		console.log(document.cookie.split('='))
+
 		if (document.cookie.split('=')[1] != '')
 			fetch('/auth', {
 				method: 'POST',
@@ -42,10 +44,15 @@ class Login extends React.PureComponent<Props, State> {
 				.then((res) => res.json())
 				.then((data) => {
 					if (data.result) {
+						console.log(data)
 						this.props.success()
 						this.setState({ auth: true })
 					} else this.setState({ auth: false })
 				})
+	}
+
+	keydown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter') this.submit()
 	}
 
 	submit = () => {
@@ -62,15 +69,18 @@ class Login extends React.PureComponent<Props, State> {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					document.cookie = `key=${data.key}`
-					if (data.result) this.props.success()
-					else if (this.inputRef.current) this.inputRef.current.style.border = '1px solid red'
+					if (data.result === true) {
+						console.log(data.key)
+						this.props.success()
+						var date = new Date(2990270256951)
+						document.cookie = `key=${data.key}; expires=${date.toUTCString()}`
+					} else if (this.inputRef.current) this.inputRef.current.style.border = '1px solid red'
 				})
 		}
 	}
 
 	render() {
-		if (!this.state.auth === false)
+		if (this.state.auth === false)
 			return (
 				<div className={styles.CS}>
 					<div className={styles.SS}>
@@ -79,7 +89,12 @@ class Login extends React.PureComponent<Props, State> {
 							<InputGroup.Text>
 								<Icon>{getIcon('key')}</Icon>
 							</InputGroup.Text>
-							<Form.Control type="password" placeholder={getString('password')} ref={this.inputRef} />
+							<Form.Control
+								onKeyDown={this.keydown}
+								type="password"
+								placeholder={getString('password')}
+								ref={this.inputRef}
+							/>
 						</InputGroup>
 						<Button variant="primary" className={styles.BS} onClick={() => this.submit()}>
 							{getString('login')}

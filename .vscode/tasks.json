@@ -4,13 +4,13 @@
 		{
 			"label": "Webpack: Dev",
 			"type": "shell",
-			"command": "webpack --config ./webpack/webpack.config.ts --config-name server.dev --config-name client.dev --watch",
+			"command": "npm dev",
 			"problemMatcher": []
 		},
 		{
 			"label": "Webpack: Build",
 			"type": "shell",
-			"command": "webpack --config ./webpack/webpack.config.ts --config-name server.prod --config-name client.prod",
+			"command": "npm build",
 			"problemMatcher": []
 		}
 	]

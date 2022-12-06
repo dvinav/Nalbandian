@@ -8,6 +8,10 @@
 			"@babel/preset-env"
 		]
 	},
+	"scripts": {
+		"dev": "webpack --config ./webpack/webpack.config.ts --config-name server.dev --config-name client.dev --watch",
+		"build": "webpack --config ./webpack/webpack.config.ts --config-name server.prod --config-name client.prod"
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/DvinAvanesian/Nalbandian.git"

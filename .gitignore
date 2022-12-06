@@ -109,3 +109,5 @@ uploads
 server
 temp
 server.js
+utils
+package-lock.json

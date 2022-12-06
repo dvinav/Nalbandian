@@ -4,17 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
-
-const template = `
-<html lang="hy">
-	<head>
-		<link rel="stylesheet" href="styles.css" />
-		<link rel="icon" href="/img/favicon.ico" />
-	</head>
-	<body>
-		<div id="root"></div>
-	</body>
-</html>`
+import templates from './templates'
 
 const clientConfig = {
 	name: 'client.prod',
@@ -73,7 +63,7 @@ const clientConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			templateContent: template,
+			templateContent: templates.prod,
 			minify: true,
 			filename: path.join(__dirname, '../public/index.html'),
 		}),

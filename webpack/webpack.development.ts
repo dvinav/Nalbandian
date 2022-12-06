@@ -2,13 +2,7 @@ import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
-
-const template = `
-<html lang="hy">
-	<body>
-		<div id="root"></div>
-	</body>
-</html>`
+import templates from './templates'
 
 const clientConfig = {
 	name: 'client.dev',
@@ -58,7 +52,7 @@ const clientConfig = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			templateContent: template,
+			templateContent: templates.dev,
 			filename: path.join(__dirname, '../public/index.html'),
 		}),
 		new MiniCssExtractPlugin({
