@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ES6",
+		"module": "CommonJS",
+		"skipLibCheck": true,
+		"removeComments": true,
+		"allowJs": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true,
+		"baseUrl": "../",
+		"sourceMap": true,
+		"paths": {
+			"utils/*": ["utils/*"],
+			"types/*": ["types/*"],
+			"res/*": ["res/*"]
+		}
+	},
+	"include": ["server.ts"]
+}

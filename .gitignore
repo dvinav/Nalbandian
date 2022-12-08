@@ -106,7 +106,6 @@ build
 
 public
 uploads
-server
 temp
 server.js
 utils
