@@ -10,7 +10,7 @@ export default {
 				<head>
 					<link rel="stylesheet" href="/styles.css" />
 					<link rel="icon" href="/img/favicon.ico" />
-					<link rel="manifest" href="/manifest.json
+					<link rel="manifest" href="/manifest.json" />
 				</head>
 				<body>
 					<div id="root"></div>
