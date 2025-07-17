@@ -1,0 +1,22 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: NalbandianMDB
+    volumes:
+      - ./data:/data/db
+      - ./utils/db.js:/init/db.js:ro
+    ports:
+      - 27017:27017
+    command: >
+      bash -c "
+        echo '🌱 Starting Mongo without auth to initialize...';
+        mongod --bind_ip_all --noauth --fork --logpath /var/log/mongodb.log &&
+        echo '⏳ Waiting for Mongo to be ready...' &&
+        until mongosh --eval 'db.stats()' &>/dev/null; do sleep 0.5; done &&
+        echo '🚀 Running init script...' &&
+        mongosh /init/db.js &&
+        echo '✅ Done. Restarting with auth...' &&
+        pkill mongod &&
+        sleep 1 &&
+        mongod --bind_ip_all --auth
+      "
