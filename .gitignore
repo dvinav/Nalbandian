@@ -109,3 +109,14 @@ uploads
 temp
 server.js
 package-lock.json
+data
+pass.key
+node_modules_aws-sdk_credential-providers_dist-es_loadSts_js.server.js
+vendors-node_modules_aws-sdk_core_dist-es_submodules_client_emitWarningIfUnsupportedVersion_j-aec06c.server.js
+vendors-node_modules_aws-sdk_credential-provider-cognito-identity_dist-es_loadCognitoIdentity_js.server.js
+vendors-node_modules_aws-sdk_credential-provider-sso_dist-es_loadSso_js.server.js
+vendors-node_modules_aws-sdk_nested-clients_dist-es_submodules_sso-oidc_index_js.server.js
+vendors-node_modules_aws-sdk_nested-clients_dist-es_submodules_sts_index_js.server.js
+.DS_Store
+bun.lock
+.vscode
